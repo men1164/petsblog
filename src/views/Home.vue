@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>Initial Project</p>
+    <p>Home Content</p>
   </div>
 </template>
 
