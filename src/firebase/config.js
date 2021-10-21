@@ -12,6 +12,7 @@ const firebaseConfig = {
     appId: "1:60111986825:web:66e99423169aa73d582658"
 };
 
+// init firebase app
 const firebase = initializeApp(firebaseConfig)
 
 // init services

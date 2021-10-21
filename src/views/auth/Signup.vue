@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSignup" class="w-96 p-7 mx-0 my-auto">
+  <form @submit.prevent="handleSignup">
         <h3>Sign up</h3>
         <input type="text" placeholder="Display Name" v-model="displayName">
         <input type="email" placeholder="Email" v-model="email">
@@ -24,18 +24,15 @@ export default {
 
         const { error, signup, isPending } = useSignup()
 
-        const handleSubmit = async () => {
+        const handleSignup = async () => {
             const res = await signup(email.value, password.value, displayName.value)
             if(!error.value) {
-                router.push({ name: 'UserPlaylists' })
+                console.log('SignUp Success')
+                // router.push({ name: 'UserPlaylists' })
             }
         }
 
-        return { email, password, displayName, isPending, error, handleSubmit }
+        return { email, password, displayName, isPending, error, handleSignup }
     }
 }
 </script>
-
-<style>
-
-</style>

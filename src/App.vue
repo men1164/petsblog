@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div id="content">
+  <div class="content">
     <router-view/>
   </div>
 </template>
@@ -13,3 +13,6 @@ export default {
 }
 </script>
 
+<style>
+
+</style>
