@@ -23,7 +23,7 @@ export default {
       const res = await login(email.value, password.value)
       if(!error.value) {
         console.log('Login Completed!')
-        console.log(res.res.user)
+        // console.log(res.res.user)
       }
     }
 

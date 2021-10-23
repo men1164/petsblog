@@ -28,9 +28,20 @@ const signup = async (email, password, displayName) => {
     }
 }
 
+const updatePhotoURL = async (user, url) => {
+    console.log(url)
+    try {
+        await updateProfile(user, { photoURL: url })
+    }
+    catch(err) {
+        console.log(err.message)
+        error.value = err.message
+        isPending.value = false
+    }
+}
+
 const useSignup = () => {
-    
-    return { error, signup, isPending }
+    return { error, signup, isPending, updatePhotoURL }
 }
 
 export default useSignup

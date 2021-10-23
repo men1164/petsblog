@@ -1,9 +1,11 @@
 <template>
     <form @submit.prevent="handleSignup" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
         <h3>Sign up</h3>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Display Name" v-model="displayName">
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="email" placeholder="Email" v-model="email">
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password">
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Display Name" v-model="displayName" required>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="email" placeholder="Email" v-model="email" required>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password" required>
+        <p>Profile Picture:</p>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="file" placeholder="Password" @change="handleChange" required>
         <div class="error" v-if="error">{{ error }}</div>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Sign up</button>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="isPending" disabled>Loading</button>
@@ -12,27 +14,51 @@
 
 <script>
 import useSignup from '@/composables/useSignup'
+import useStorage from '@/composables/useStorage'
+import getUser from '@/composables/getUser'
 import { ref } from '@vue/reactivity'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 
 export default {
     setup() {
         const email = ref('')
         const password = ref('')
         const displayName = ref('')
-        const router = useRouter()
+        const file = ref(null)
+        const fileError = ref(null)
+        // const router = useRouter()
+        const { url, uploadImage } = useStorage()
+        const types = ['image/png', 'image/jpeg']
+        const { user } = getUser()
 
-        const { error, signup, isPending } = useSignup()
+        const { error, signup, isPending, updatePhotoURL } = useSignup()
 
         const handleSignup = async () => {
-            const res = await signup(email.value, password.value, displayName.value)
+            const res = await signup(email.value, password.value, displayName.value, file.value)
             if(!error.value) {
                 console.log('SignUp Success')
                 // router.push({ name: 'UserPlaylists' })
             }
+            await uploadImage(file.value)
+            await updatePhotoURL(user.value, url.value)
+            console.log(user.value)
         }
 
-        return { email, password, displayName, isPending, error, handleSignup }
+        const handleChange = e => {
+            const selected = e.target.files[0]
+
+            if(selected && types.includes(selected.type)) {
+                file.value = selected
+                fileError.value = null
+            }
+            else {
+                // ! Don't forget to give a error value
+                file.value = null
+                fileError.value = 'Please select an image file (png or jpg)'
+            }
+        }
+
+        return { email, password, displayName, isPending, error, handleSignup, handleChange }
     }
 }
 </script>
