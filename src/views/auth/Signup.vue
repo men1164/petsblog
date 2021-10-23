@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent="handleSignup">
+    <form @submit.prevent="handleSignup" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
         <h3>Sign up</h3>
-        <input type="text" placeholder="Display Name" v-model="displayName">
-        <input type="email" placeholder="Email" v-model="email">
-        <input type="password" placeholder="Password" v-model="password">
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Display Name" v-model="displayName">
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="email" placeholder="Email" v-model="email">
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password">
         <div class="error" v-if="error">{{ error }}</div>
-        <button v-if="!isPending">Sign up</button>
-        <button v-if="isPending" disabled>Loading</button>
+        <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Sign up</button>
+        <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="isPending" disabled>Loading</button>
   </form>
 </template>
 
