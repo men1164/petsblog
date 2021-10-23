@@ -3,7 +3,7 @@
     <nav class="flex items-center max-w-7xl mx-auto my-0">
       <p>Navbar</p>
       <div v-if="user" class="ml-auto">
-        <p>Welcome! {{ user.displayName }}</p>
+        <p>{{ user.displayName }}</p>
         <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
       </div>
       <div v-else class="ml-auto">
@@ -30,7 +30,7 @@ export default {
       }
     }
 
-    return { handleLogout, user }
+    return { handleLogout, user, isPending }
   }
 }
 </script>
