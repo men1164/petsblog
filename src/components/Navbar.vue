@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar py-4 px-2 mb-14 bg-white sticky top-0 z-50">
+  <div class="navbar py-4 px-2 bg-white sticky top-0 z-50">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0">
       <p class="font-bold text-xl">Navbar</p>
       <div class="ml-auto font-normal text-base">
