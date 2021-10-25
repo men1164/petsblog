@@ -1,8 +1,8 @@
 <template>
   <div class="navbar py-4 px-2 mb-14 bg-white sticky top-0 z-50">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0">
-      <p>Navbar</p>
-      <div class="ml-auto">
+      <p class="font-bold text-xl">Navbar</p>
+      <div class="ml-auto font-normal text-base">
         <div v-if="user" class="flex flex-row items-center">
           <p class="mr-5">{{ user.displayName }}</p>
           <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
