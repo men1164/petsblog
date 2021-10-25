@@ -1,14 +1,16 @@
 <template>
-  <div class="navbar py-4 px-2 mb-14 bg-white">
-    <nav class="flex items-center max-w-7xl mx-auto my-0">
+  <div class="navbar py-4 px-2 mb-14 bg-white sticky top-0 z-50">
+    <nav class="flex items-center h-10 max-w-7xl mx-auto my-0">
       <p>Navbar</p>
-      <div v-if="user" class="ml-auto">
-        <p>{{ user.displayName }}</p>
-        <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
-      </div>
-      <div v-else class="ml-auto">
-        <router-link :to="{ name: 'Login' }" class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2">Login</router-link>
-        <router-link :to="{ name: 'Signup' }" class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md">Signup</router-link>
+      <div class="ml-auto">
+        <div v-if="user" class="flex flex-row items-center">
+          <p class="mr-5">{{ user.displayName }}</p>
+          <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
+        </div>
+        <!-- <div v-else>
+          <router-link :to="{ name: 'Login' }" class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2">Login</router-link>
+          <router-link :to="{ name: 'Signup' }" class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md">Signup</router-link>
+        </div> -->
       </div>
     </nav>
   </div>
