@@ -12,7 +12,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      fontWeight: ['hover', 'focus'],
+      transitionDuration: ['hover', 'focus'],
+    },
   },
   plugins: [],
 }
