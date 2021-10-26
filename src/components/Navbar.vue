@@ -1,7 +1,7 @@
 <template>
-  <div class="navbar py-4 px-2 bg-white sticky top-0 z-50">
+  <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0">
-      <p class="font-bold text-xl">Navbar</p>
+      <p class="font-bold text-xl text-white">Navbar</p>
       <div class="ml-auto font-normal text-base">
         <div v-if="user" class="flex flex-row items-center">
           <p class="mr-5">{{ user.displayName }}</p>
@@ -36,3 +36,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.navbar {
+  backdrop-filter: blur(6.7px);
+  -webkit-backdrop-filter: blur(6.7px);
+}
+</style>

@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       maxWidth: {
         '400': '400px'
+      },
+      backgroundColor: {
+        'primary-green': '#6BA8A0'
       }
     },
   },
