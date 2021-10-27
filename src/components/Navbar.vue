@@ -4,6 +4,9 @@
       <p class="font-bold text-xl text-white">Navbar</p>
       <div class="ml-14 font-medium">
         <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
+        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
+        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
+        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
         <!-- <router-link>Your Pet</router-link>
         <router-link>Following</router-link> -->
       </div>
