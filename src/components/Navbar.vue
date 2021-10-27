@@ -2,10 +2,7 @@
   <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0 text-white">
       <p class="font-bold text-xl text-white">Navbar</p>
-      <div class="ml-14 font-medium">
-        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
-        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
-        <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
+      <div v-if="user" class="ml-14 font-medium">
         <router-link class="text-gray-100 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'UserInfo' }">Profile</router-link>
         <!-- <router-link>Your Pet</router-link>
         <router-link>Following</router-link> -->
@@ -47,7 +44,7 @@ export default {
 
 <style scoped>
 .navbar {
-  backdrop-filter: blur(6.7px);
-  -webkit-backdrop-filter: blur(6.7px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 </style>

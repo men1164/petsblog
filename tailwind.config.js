@@ -4,9 +4,13 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        '400': '400px'
+        '400': '400px',
+        '1/2': '150%'
       },
       backgroundColor: {
+        'primary-green': '#6BA8A0'
+      },
+      textColor: {
         'primary-green': '#6BA8A0'
       }
     },
