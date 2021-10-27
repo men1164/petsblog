@@ -1,17 +1,14 @@
 import { uploadBytes, ref, getDownloadURL } from '@firebase/storage'
 import { ref as refVue } from '@vue/runtime-dom'
 import { projectStorage } from '../firebase/config'
-import getUser from './getUser'
-
-const { user } = getUser()
 
 const useStorage = () => {
     const error = refVue(null)
     const url = refVue(null)
     const filePath = refVue(null)
 
-    const uploadImage = async (file) => {
-        filePath.value = `profileImg/${user.value.uid}/${file.name}`
+    const uploadImage = async (file, userID) => {
+        filePath.value = `profileImg/${userID}/${file.name}`
         const storageRef = ref(projectStorage, filePath.value)
 
         try {

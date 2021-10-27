@@ -15,7 +15,7 @@
 <script>
 import useSignup from '@/composables/useSignup'
 import useStorage from '@/composables/useStorage'
-import getUser from '@/composables/getUser'
+import useUserDetail from '@/composables/useUserDetail'
 import { ref } from '@vue/reactivity'
 // import { useRouter } from 'vue-router'
 
@@ -28,20 +28,31 @@ export default {
         const fileError = ref(null)
         // const router = useRouter()
         const { url, uploadImage } = useStorage()
+        const { initDetail } = useUserDetail('userDetail')
         const types = ['image/png', 'image/jpeg']
-        const { user } = getUser()
 
         const { error, signup, isPending, updatePhotoURL } = useSignup()
 
         const handleSignup = async () => {
             const res = await signup(email.value, password.value, displayName.value, file.value)
+            await uploadImage(file.value, res.user.uid)
+            await updatePhotoURL(res.user, url.value)
+
+            const initDoc = {
+                userID: res.user.uid,
+                isVeterinarian: false,
+                follwedPets: [],
+                ownPetsID: []
+            }
+            const resDetail = initDetail(initDoc)
+            if(resDetail) {
+                console.log(resDetail)
+            }
             if(!error.value) {
                 console.log('SignUp Success')
                 // router.push({ name: 'UserPlaylists' })
             }
-            await uploadImage(file.value)
-            await updatePhotoURL(user.value, url.value)
-            console.log(user.value)
+            // console.log(user.value)
         }
 
         const handleChange = e => {
