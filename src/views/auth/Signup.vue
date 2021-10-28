@@ -9,7 +9,7 @@
         <div class="error" v-if="error">{{ error }}</div>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Sign up</button>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="isPending" disabled>Loading</button>
-  </form>
+    </form>
 </template>
 
 <script>
