@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Signup from '../views/auth/Signup.vue'
 import Login from '../views/auth/Login.vue'
 import UserInfo from '../views/users/UserInfo.vue'
+import CreatePet from '../views/users/CreatePet.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/userinfo',
     name: 'UserInfo',
     component: UserInfo
+  },
+  {
+    path: '/createpet',
+    name: 'CreatePet',
+    component: CreatePet
   }
 ]
 
