@@ -1,5 +1,5 @@
 import { projectFirestore } from "../firebase/config"
-import { collection, addDoc } from "@firebase/firestore"
+import { collection, addDoc, updateDoc, doc } from "@firebase/firestore"
 import { ref } from 'vue'
 
 const useUserDetail = (collectionName) => {
@@ -14,11 +14,24 @@ const useUserDetail = (collectionName) => {
         catch(err){
             error.value = err.message
             console.log(error.value)
-            error.value = null
         }
     }
 
-    return { error, initDetail }
+    const userVerify = async (id) => {
+
+        const docRef = doc(projectFirestore, 'userDetail', id)
+        try {
+            await updateDoc(docRef, {
+                isVeterinarian: true
+            })
+        }
+        catch(err) {
+            error.value = err.message
+            console.log(err.message)
+        }
+    }
+
+    return { error, initDetail, userVerify }
 }
 
 export default useUserDetail

@@ -12,9 +12,9 @@
         <p class="font-medium mt-2">{{ user.email }}</p>
         <button class="mt-4 rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleToggle" v-if="!toggleForm">Verify Veterinarian Account</button>
         <div v-if="!userDetail.isVeterinarian">
-            <form v-if="toggleForm" class="flex flex-col justify-center items-center mt-4">
+            <form v-if="toggleForm" @submit.prevent="handleVerify" class="flex flex-col justify-center items-center mt-4">
                 <label>Upload Graduated Certificate from Veterinary Medicine</label>
-                <input type="file">
+                <button class="m-2 bg-gray-100 p-2 rounded-md shadow-lg border border-gray-300">Mockup Upload</button>
             </form>
         </div>
     </div>
@@ -22,20 +22,33 @@
 
 <script>
 import getUser from '@/composables/getUser'
+import getUserDetail from '@/composables/getUserDetail'
+import useUserDetail from '@/composables/useUserDetail'
 import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
-        const { user, getUserDetail } = getUser()
+        const { user } = getUser()
+        const { error, userVerify } = useUserDetail()
         const toggleForm = ref(false)
+        const router = useRouter()
 
-        const userDetail = getUserDetail('userDetail')
+        const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        // console.log(userDetail.value)
 
         const handleToggle = () => {
             toggleForm.value = !toggleForm.value
         }
 
-        return { user, toggleForm, handleToggle, userDetail }
+        const handleVerify = async () => {
+            await userVerify(userDetail.value.docId)
+            if(!error.value) {
+                router.push({ name: 'UserInfo' })
+            }
+        }
+
+        return { user, toggleForm, handleToggle, handleVerify, userDetail }
     }
 }
 </script>
