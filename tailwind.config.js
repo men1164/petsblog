@@ -11,7 +11,8 @@ module.exports = {
         'primary-green': '#6BA8A0'
       },
       textColor: {
-        'primary-green': '#6BA8A0'
+        'primary-green': '#6BA8A0',
+        'verified-green': '#13CC00'
       }
     },
   },
