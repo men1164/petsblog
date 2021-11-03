@@ -6,7 +6,8 @@
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password" required>
         <p>Profile Picture:</p>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="file" placeholder="Password" @change="handleChange" required>
-        <div class="error" v-if="error">{{ error }}</div>
+        <div class="text-sm text-red-500" v-if="error">{{ error }}</div>
+        <div class="text-sm text-red-500" v-if="fileError">{{ fileError }}</div>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Sign up</button>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="isPending" disabled>Loading</button>
     </form>
@@ -34,25 +35,32 @@ export default {
         const { error, signup, isPending, updatePhotoURL } = useSignup()
 
         const handleSignup = async () => {
-            const res = await signup(email.value, password.value, displayName.value, file.value)
-            await uploadImage(file.value, res.user.uid)
-            await updatePhotoURL(res.user, url.value)
 
-            const initDoc = {
-                userID: res.user.uid,
-                isVeterinarian: false,
-                follwedPets: [],
-                ownPetsID: []
+            if(file.value) {
+                const res = await signup(email.value, password.value, displayName.value, file.value)
+                await uploadImage(file.value, res.user.uid)
+                await updatePhotoURL(res.user, url.value)
+    
+                const initDoc = {
+                    userID: res.user.uid,
+                    username: res.user.displayName,
+                    isVeterinarian: false,
+                    follwedPets: [],
+                    ownPetsID: []
+                }
+                const resDetail = initDetail(initDoc)
+                if(resDetail) {
+                    console.log(resDetail)
+                }
+                if(!error.value) {
+                    console.log('SignUp Success')
+                    // router.push({ name: 'UserPlaylists' })
+                }
+                // console.log(user.value)
             }
-            const resDetail = initDetail(initDoc)
-            if(resDetail) {
-                console.log(resDetail)
+            else {
+                fileError.value = 'Please select an image file (png or jpg)'
             }
-            if(!error.value) {
-                console.log('SignUp Success')
-                // router.push({ name: 'UserPlaylists' })
-            }
-            // console.log(user.value)
         }
 
         const handleChange = e => {
@@ -66,10 +74,11 @@ export default {
                 // ! Don't forget to give a error value
                 file.value = null
                 fileError.value = 'Please select an image file (png or jpg)'
+                console.log(fileError.value)
             }
         }
 
-        return { email, password, displayName, isPending, error, handleSignup, handleChange }
+        return { email, password, displayName, isPending, error, handleSignup, handleChange, fileError }
     }
 }
 </script>
