@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Signup from '../views/auth/Signup.vue'
 import Login from '../views/auth/Login.vue'
 import BlogLists from '../views/blogs/BlogLists.vue'
+import FollowingBlog from '../views/blogs/FollowingBlog.vue'
 import UserInfo from '../views/users/UserInfo.vue'
 
 const routes = [

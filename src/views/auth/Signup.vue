@@ -46,7 +46,8 @@ export default {
                     username: res.user.displayName,
                     isVeterinarian: false,
                     follwedPets: [],
-                    ownPetsID: []
+                    ownPetsID: [],
+                    readingLists: []
                 }
                 const resDetail = initDetail(initDoc)
                 if(resDetail) {
