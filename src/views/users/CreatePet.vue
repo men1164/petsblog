@@ -21,6 +21,7 @@ import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import usePet from '@/composables/usePet'
 import useUserDetail from '@/composables/useUserDetail'
+import useStorage from '@/composables/useStorage'
 
 export default {
     setup() {
@@ -29,10 +30,11 @@ export default {
         const breed = ref('')
         const file = ref(null)
         const fileError = ref()
-        const { isPending, error, createPet } = usePet('petDetail')
+        const { isPending, error, createPet, updatePetPhotoURL } = usePet('petDetail')
         const { addPet } = useUserDetail('userDetail')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        const { url, uploadImage } = useStorage()
 
         const handleCreatePet = async () => {
 
@@ -49,6 +51,8 @@ export default {
                 const res = await createPet(petDoc)
                 // console.log(res.id)
                 await addPet(userDetail.value.docId, res.id)
+                await uploadImage(file.value, res.id, 'petImg')
+                await updatePetPhotoURL(res.id, url.value)
                 // route to pet profile landing page
             }
             else {

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
-import { addDoc, collection } from '@firebase/firestore'
+import { addDoc, collection, doc, updateDoc } from '@firebase/firestore'
 
 
 const usePet = (collectionName) => {
@@ -13,7 +13,7 @@ const usePet = (collectionName) => {
 
         try {
             const res = await addDoc(collection(projectFirestore, collectionName), doc)
-            isPending.value = false
+            // isPending.value = false
             return res
         }
         catch(err){
@@ -22,7 +22,22 @@ const usePet = (collectionName) => {
         }
     }
 
-    return { isPending, error, createPet }
+    const updatePetPhotoURL = async (id, url) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+        
+        try {
+            await updateDoc(docRef, {
+                photoURL: url
+            })
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = err.message
+        }
+    }
+
+    return { isPending, error, createPet, updatePetPhotoURL }
 }
 
 export default usePet
