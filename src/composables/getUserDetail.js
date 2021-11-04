@@ -17,6 +17,12 @@ const getUserDetail = (collectionName, uid) => {
         userDetail.value = result[0]
     })
 
+    watchEffect(onValidate => {
+        onValidate(() => {
+            unsub()
+        })
+    })
+
     return { userDetail }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white max-w-lg h-auto rounded-2xl shadow-xl mx-auto my-0 p-12 flex flex-col justify-center items-center">
+    <div class="bg-white max-w-lg h-auto rounded-2xl shadow-xl mx-auto my-8 p-12 flex flex-col justify-center items-center">
         <p class="font-bold text-4xl text-primary-green">Your Profile</p>
         <img class="w-56 h-56 mt-8 rounded-full object-cover" :src="user.photoURL">
         <div v-if="userDetail && userDetail.isVeterinarian" class="flex flex-row items-center mt-4 shadow-md bg-gray-200 rounded-full p-2 text-verified-green">
@@ -30,7 +30,7 @@ import { useRouter } from 'vue-router'
 export default {
     setup() {
         const { user } = getUser()
-        const { error, userVerify } = useUserDetail()
+        const { error, userVerify } = useUserDetail('userDetail')
         const toggleForm = ref(false)
         const router = useRouter()
 
