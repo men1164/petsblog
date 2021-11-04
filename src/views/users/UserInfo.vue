@@ -34,7 +34,7 @@ export default {
         const toggleForm = ref(false)
         const router = useRouter()
 
-        const { userDetail } = getUserDetail('userDetail', 'Or3jBuL17yUmgFcj7HTUqyJFIQc2')
+        const { userDetail } = getUserDetail('userDetail', user.value.uid)
 
         const handleToggle = () => {
             toggleForm.value = !toggleForm.value

@@ -1,5 +1,5 @@
 import { projectFirestore } from "../firebase/config"
-import { collection, addDoc, updateDoc, doc } from "@firebase/firestore"
+import { collection, addDoc, updateDoc, doc, arrayUnion } from "@firebase/firestore"
 import { ref } from 'vue'
 
 const useUserDetail = (collectionName) => {
@@ -7,6 +7,7 @@ const useUserDetail = (collectionName) => {
     const error = ref(null)
 
     const initDetail = async (doc) => {
+        error.value = null
         try {
             const res = await addDoc(collection(projectFirestore, collectionName), doc)
             return res
@@ -17,9 +18,25 @@ const useUserDetail = (collectionName) => {
         }
     }
 
-    const userVerify = async (id) => {
+    const addPet = async (id, petId) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
 
-        const docRef = doc(projectFirestore, 'userDetail', id)
+        try {
+            const res = await updateDoc(docRef, {
+                ownPetsID: arrayUnion(petId)
+            })
+            // return res
+        }
+        catch(err) {
+            error.value = err.message
+            console.log(error.value)
+        }
+    }
+
+    const userVerify = async (id) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
         try {
             await updateDoc(docRef, {
                 isVeterinarian: true
@@ -31,7 +48,7 @@ const useUserDetail = (collectionName) => {
         }
     }
 
-    return { error, initDetail, userVerify }
+    return { error, initDetail, userVerify, addPet }
 }
 
 export default useUserDetail

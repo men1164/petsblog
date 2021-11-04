@@ -38,7 +38,7 @@ export default {
 
             if(file.value) {
                 const res = await signup(email.value, password.value, displayName.value, file.value)
-                await uploadImage(file.value, res.user.uid)
+                await uploadImage(file.value, res.user.uid, 'profileImg')
                 await updatePhotoURL(res.user, url.value)
     
                 const initDoc = {
