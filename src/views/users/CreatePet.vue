@@ -2,11 +2,17 @@
     <!-- Mockup Form -->
     <form @submit.prevent="handleCreatePet" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
         <h3>Create Pet</h3>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Pet's Name" v-model="petsName" required>
+        <div v-if="!file" class="w-28 h-28 rounded-full object-cover mx-auto">
+            <img class="transform scale-75" src="@/assets/pawprint.png">
+        </div>
+        <div v-else>
+            <img class="w-28 h-28 rounded-full object-cover mx-auto" :src="previewURL">
+        </div>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" type="text" placeholder="Pet's Name" v-model="petsName" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Breed" v-model="breed" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="number" placeholder="Age (Years old)" v-model="age" required>
-        <p>Pet's Picture:</p>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="file" placeholder="Password" @change="handleChange" required>
+        <p>Pet's Profile Picture:</p>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto" type="file" placeholder="Password" @change="handleChange" required>
         <div class="text-sm text-red-500" v-if="error">{{ error }}</div>
         <div class="text-sm text-red-500" v-if="fileError">{{ fileError }}</div>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Create Pet</button>
@@ -35,6 +41,7 @@ export default {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { url, uploadImage } = useStorage()
+        const previewURL = ref(null)
 
         const handleCreatePet = async () => {
 
@@ -67,6 +74,7 @@ export default {
 
             if(selected && types.includes(selected.type)) {
                 file.value = selected
+                previewURL.value = URL.createObjectURL(file.value)
                 fileError.value = null
             }
             else {
@@ -76,7 +84,7 @@ export default {
             }
         }
 
-        return { petsName, age, breed, fileError, isPending, error, handleCreatePet, handleChange }
+        return { petsName, age, breed, fileError, isPending, error, handleCreatePet, handleChange, previewURL, file }
     }
 }
 </script>
