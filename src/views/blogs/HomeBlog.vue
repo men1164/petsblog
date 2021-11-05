@@ -37,17 +37,17 @@ export default {
     components: { BlogCardSM, PetCard },
     setup() {
         onMounted((e) => {
-            const scrollContainer = document.querySelector('.blogcard-sm');
-            const scrollContainer2 = document.querySelector('.petcard');
+            const blogCard = document.querySelector('.blogcard-sm');
+            const petCard = document.querySelector('.petcard');
 
-            scrollContainer.addEventListener("wheel", e => {
+            blogCard.addEventListener("wheel", e => {
                 e.preventDefault();
-                scrollContainer.scrollLeft += e.deltaY;
+                blogCard.scrollLeft += e.deltaY;
             });
 
-            scrollContainer2.addEventListener("wheel", e => {
+            petCard.addEventListener("wheel", e => {
                 e.preventDefault();
-                scrollContainer2.scrollLeft += e.deltaY;
+                petCard.scrollLeft += e.deltaY;
             });
         })
         // const handleScroll = e => {
