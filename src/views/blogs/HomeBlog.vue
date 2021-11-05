@@ -15,23 +15,25 @@
         <p class="text-white font-semobold text-lg">New Blog from our members!</p>
     </div>
     <div class="flex px-20 pt-4 pb-10 w-full overflow-x-auto">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
+        <PetCard />
     </div>
 </template>
 
 <script>
-import BlogCard from '@/components/BlogCard.vue'
+import PetCard from '@/components/PetCard.vue'
 import BlogCardSM from '@/components/BlogCardSM.vue'
 
 export default {
-    components: { BlogCardSM, BlogCard },
+    components: { BlogCardSM, PetCard },
     setup() {
         // const handleScroll = e => {
 
