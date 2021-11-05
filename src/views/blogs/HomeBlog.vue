@@ -2,7 +2,7 @@
     <div class="ml-20 mt-15">
         <p class="text-white font-semibold text-lg">News from our Veterinarian!</p>
     </div>
-    <div class="flex px-20 py-4 overflow-x-auto">
+    <div class="blogcard-sm flex px-20 py-4 overflow-x-auto">
         <BlogCardSM />
         <BlogCardSM />
         <BlogCardSM />
@@ -14,7 +14,7 @@
     <div class="ml-20 mt-10">
         <p class="text-white font-semibold text-lg">New Blog from our members!</p>
     </div>
-    <div class="flex px-20 pt-4 pb-10 w-full overflow-x-auto">
+    <div class="petcard flex px-20 pt-4 pb-10 w-full overflow-x-auto">
         <PetCard />
         <PetCard />
         <PetCard />
@@ -31,10 +31,25 @@
 <script>
 import PetCard from '@/components/PetCard.vue'
 import BlogCardSM from '@/components/BlogCardSM.vue'
+import { onMounted } from '@vue/runtime-core'
 
 export default {
     components: { BlogCardSM, PetCard },
     setup() {
+        onMounted((e) => {
+            const scrollContainer = document.querySelector('.blogcard-sm');
+            const scrollContainer2 = document.querySelector('.petcard');
+
+            scrollContainer.addEventListener("wheel", e => {
+                e.preventDefault();
+                scrollContainer.scrollLeft += e.deltaY;
+            });
+
+            scrollContainer2.addEventListener("wheel", e => {
+                e.preventDefault();
+                scrollContainer2.scrollLeft += e.deltaY;
+            });
+        })
         // const handleScroll = e => {
 
         // }
