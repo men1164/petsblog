@@ -1,11 +1,17 @@
 <template>
     <form @submit.prevent="handleSignup" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
         <h3>Sign up</h3>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Display Name" v-model="displayName" required>
+        <div v-if="!file">
+            <img class="w-28 h-28 rounded-full object-cover mx-auto" src="@/assets/default-user-profile.jpeg">
+        </div>
+        <div v-else>
+            <img class="w-28 h-28 rounded-full object-cover mx-auto" :src="previewURL">
+        </div>
+        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" type="text" placeholder="Display Name" v-model="displayName" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="email" placeholder="Email" v-model="email" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password" required>
         <p>Profile Picture:</p>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="file" placeholder="Password" @change="handleChange" required>
+        <input class="border-b border-gray-300 p-2 outline-none w-full mx-auto" type="file" placeholder="Password" @change="handleChange" required>
         <div class="text-sm text-red-500" v-if="error">{{ error }}</div>
         <div class="text-sm text-red-500" v-if="fileError">{{ fileError }}</div>
         <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Sign up</button>
@@ -31,6 +37,7 @@ export default {
         const { url, uploadImage } = useStorage()
         const { initDetail } = useUserDetail('userDetail')
         const types = ['image/png', 'image/jpeg']
+        const previewURL = ref(null)
 
         const { error, signup, isPending, updatePhotoURL } = useSignup()
 
@@ -55,6 +62,7 @@ export default {
                 }
                 if(!error.value) {
                     console.log('SignUp Success')
+                    // * TODO: push router to HomeBlog
                     // router.push({ name: 'UserPlaylists' })
                 }
                 // console.log(user.value)
@@ -69,17 +77,17 @@ export default {
 
             if(selected && types.includes(selected.type)) {
                 file.value = selected
+                previewURL.value = URL.createObjectURL(file.value)
                 fileError.value = null
             }
             else {
-                // ! Don't forget to give a error value
                 file.value = null
                 fileError.value = 'Please select an image file (png or jpg)'
                 console.log(fileError.value)
             }
         }
 
-        return { email, password, displayName, isPending, error, handleSignup, handleChange, fileError }
+        return { email, password, displayName, isPending, error, handleSignup, handleChange, fileError, file, previewURL }
     }
 }
 </script>
