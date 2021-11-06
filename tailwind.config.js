@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       maxWidth: {
         '400': '400px',
-        '1/2': '150%'
+        '1/2': '150%',
+        'cardWidth': '275px'
       },
       minWidth: {
         'cardWidth': '275px',
@@ -14,6 +15,9 @@ module.exports = {
       minHeight: {
         'cardHeight': '400px',
         'cardHeight-sm': '100px'
+      },
+      maxHeight: {
+        'cardHeight': '400px',
       },
       backgroundColor: {
         'primary-green': '#6BA8A0'

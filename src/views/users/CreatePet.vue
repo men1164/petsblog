@@ -11,6 +11,11 @@
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" type="text" placeholder="Pet's Name" v-model="petsName" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Breed" v-model="breed" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="number" placeholder="Age (Years old)" v-model="age" required>
+        <select class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" v-model="gender" required>
+            <option disabled>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
         <p>Pet's Profile Picture:</p>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto" type="file" placeholder="Password" @change="handleChange" required>
         <div class="text-sm text-red-500" v-if="error">{{ error }}</div>
@@ -32,6 +37,7 @@ import useStorage from '@/composables/useStorage'
 export default {
     setup() {
         const petsName = ref('')
+        const gender = ref(null)
         const age = ref(null)
         const breed = ref('')
         const file = ref(null)
@@ -48,9 +54,10 @@ export default {
             const petDoc = {
                 petsName: petsName.value,
                 age: age.value,
+                gender: gender.value,
                 breed: breed.value,
                 photoURL: '',
-                ownerID: user.value.uid,
+                ownerDocID: userDetail.value.docId,
                 blogID: []
             }
 
@@ -84,7 +91,7 @@ export default {
             }
         }
 
-        return { petsName, age, breed, fileError, isPending, error, handleCreatePet, handleChange, previewURL, file }
+        return { petsName, age, gender, breed, fileError, isPending, error, handleCreatePet, handleChange, previewURL, file }
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-white rounded-3xl min-w-cardWidth min-h-cardHeight mb-7 mr-7 shadow-xl">
+    <div class="card bg-white rounded-3xl min-w-cardWidth min-h-cardHeight max-w-cardWidth max-h-cardHeight mb-7 mr-7 shadow-xl">
         <div class="flex flex-col w-full h-full">
             <div class="w-full h-2/3 relative">
                 <img class="absolute top-1 right-3 h-10 w-10" src="@/assets/new.png">
@@ -17,7 +17,10 @@
 
 <script>
 export default {
-
+    props: ['pets'],
+    setup(props) {
+        
+    }
 }
 </script>
 

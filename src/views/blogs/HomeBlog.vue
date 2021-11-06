@@ -15,16 +15,7 @@
         <p class="text-white font-semibold text-lg">New Blog from our members!</p>
     </div>
     <div class="petcard flex px-20 pt-4 pb-10 w-full overflow-x-auto">
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
-        <PetCard />
+        <PetCard v-if="pets" :pets="pets" />
     </div>
 </template>
 
@@ -32,10 +23,13 @@
 import PetCard from '@/components/PetCard.vue'
 import BlogCardSM from '@/components/BlogCardSM.vue'
 import { onMounted } from '@vue/runtime-core'
+import getPets from '@/composables/getPets'
 
 export default {
     components: { BlogCardSM, PetCard },
     setup() {
+        const { pets, error } = getPets('petDetail')
+
         onMounted((e) => {
             const blogCard = document.querySelector('.blogcard-sm');
             const petCard = document.querySelector('.petcard');
@@ -54,7 +48,7 @@ export default {
 
         // }
 
-        // return { handleScroll }
+        return { pets, error }
     }
 }
 </script>
