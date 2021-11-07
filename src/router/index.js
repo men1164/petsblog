@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import LandingPet from '../views/users/LandingPet.vue'
 import Signup from '../views/auth/Signup.vue'
 import Login from '../views/auth/Login.vue'
 import HomeBlog from '../views/blogs/HomeBlog.vue'
@@ -17,6 +18,12 @@ const routes = [
     path: '/blog',
     name: 'HomeBlog',
     component: HomeBlog
+  },
+  {
+    path: '/pet/:id',
+    name: 'LandingPet',
+    component: LandingPet,
+    props: true
   },
   {
     path: '/blog/following',

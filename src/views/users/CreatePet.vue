@@ -58,6 +58,7 @@ export default {
                 breed: breed.value,
                 photoURL: '',
                 ownerDocID: userDetail.value.docId,
+                ownerName: user.value.displayName,
                 blogID: []
             }
 

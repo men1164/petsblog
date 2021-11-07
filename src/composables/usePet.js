@@ -13,10 +13,11 @@ const usePet = (collectionName) => {
 
         try {
             const res = await addDoc(collection(projectFirestore, collectionName), doc)
-            // isPending.value = false
+            isPending.value = false
             return res
         }
         catch(err){
+            isPending.value = false
             error.value = err.message
             console.log(error.value)
         }
