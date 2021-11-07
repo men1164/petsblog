@@ -16,7 +16,12 @@ const getPets = (collectionName, query) => {
         snap.docs.forEach(doc => {
             results.push({ ...doc.data(), docId: doc.id })
         })
-        pets.value = results
+        if(results.length != 0) {
+            pets.value = results
+        }
+        else {
+            pets.value = null
+        }
         error.value = null
     }, (err) => {
         console.log(err.message)
