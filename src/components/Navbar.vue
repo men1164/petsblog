@@ -12,7 +12,9 @@
       </div>
       <div class="ml-auto font-normal text-base">
         <div v-if="user" class="flex flex-row items-center">
-          <p class="mr-5">{{ user.displayName }}</p>
+          <router-link :to="{ name: 'UserInfo' }">
+            <p class="mr-5">{{ user.displayName }}</p>
+          </router-link>
           <button class="rounded-xl text-black bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
         </div>
       </div>
