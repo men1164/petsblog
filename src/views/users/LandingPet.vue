@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col h-full w-auto items-center">
+    <div v-if="pet" class="flex flex-col h-full w-auto items-center">
         <div class="pet-profile text-white bg-white bg-opacity-25 rounded-3xl w-1/3 h-full text-center p-6 shadow-xl mb-10">
             <img class="my-3 mx-auto object-cover w-40 h-40 rounded-full" :src="pet.photoURL">
             <p class="font-semibold text-xl mb-2">{{ pet.petsName }}</p>
@@ -27,6 +27,8 @@
 
 <script>
 import getPetDetail from '@/composables/getPetDetail'
+import getUser from '@/composables/getUser'
+import getUserDetail from '@/composables/getUserDetail'
 import BlogCard from '@/components/BlogCard.vue'
 
 export default {
@@ -34,6 +36,8 @@ export default {
     components: { BlogCard },
     setup(props) {
         const { pet, error } = getPetDetail('petDetail', props.id)
+        const { user } = getUser()
+        const { userDetail } = getUserDetail('userDetail', user.value.uid)
 
         // ! Computed is owner?
 
