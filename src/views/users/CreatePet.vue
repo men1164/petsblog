@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-lg h-auto mx-auto my-0 p-12 flex flex-col justify-center items-center">
+  <div class="max-w-lg h-auto mx-auto my-0 flex flex-col justify-center items-center">
       <p class="font-bold text-4xl text-white">Pet Profile</p>
       <img class="w-56 h-56 mt-8 rounded-full object-cover" src="https://timesofindia.indiatimes.com/photo/67586673.cms">
       <p class="font-medium mt-2 text-white">Edit</p>
