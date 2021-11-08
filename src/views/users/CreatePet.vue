@@ -12,9 +12,9 @@
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Breed" v-model="breed" required>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="number" placeholder="Age (Years old)" v-model="age" required>
         <select class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" v-model="gender" required>
-            <option disabled>Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="" disabled>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
         </select>
         <p>Pet's Profile Picture:</p>
         <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto" type="file" placeholder="Password" @change="handleChange" required>
@@ -37,11 +37,11 @@ import useStorage from '@/composables/useStorage'
 export default {
     setup() {
         const petsName = ref('')
-        const gender = ref(null)
+        const gender = ref('')
         const age = ref(null)
         const breed = ref('')
         const file = ref(null)
-        const fileError = ref()
+        const fileError = ref(null)
         const { isPending, error, createPet, updatePetPhotoURL } = usePet('petDetail')
         const { addPet } = useUserDetail('userDetail')
         const { user } = getUser()
@@ -50,12 +50,15 @@ export default {
         const previewURL = ref(null)
 
         const handleCreatePet = async () => {
+            
+            const capitalizeName = petsName.value[0].toUpperCase() + petsName.value.slice(1)
+            const capitalizeBreed = breed.value[0].toUpperCase() + breed.value.slice(1)
 
             const petDoc = {
-                petsName: petsName.value,
+                petsName: capitalizeName,
                 age: age.value,
                 gender: gender.value,
-                breed: breed.value,
+                breed: capitalizeBreed,
                 photoURL: '',
                 ownerDocID: userDetail.value.docId,
                 ownerName: user.value.displayName,
