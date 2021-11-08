@@ -11,8 +11,15 @@
             <div class="w-full">
                 <p class="font-semibold text-lg text-white border-b-2">Blogs from {{ pet.petsName }} !</p>
             </div>
-            <div>
-
+            <div class="my-6">
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
             </div>
         </div>
     </div>
@@ -20,9 +27,11 @@
 
 <script>
 import getPetDetail from '@/composables/getPetDetail'
+import BlogCard from '@/components/BlogCard.vue'
 
 export default {
     props: ['id'],
+    components: { BlogCard },
     setup(props) {
         const { pet, error } = getPetDetail('petDetail', props.id)
 
