@@ -6,6 +6,10 @@
             <p class="text-base">Owner: {{ pet.ownerName }}</p>
             <p class="text-base">Gender: {{ pet.gender }}</p>
             <p class="text-base">Breed: {{ pet.breed }}</p>
+            <div v-if="isOwnership">
+                <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-primary-green mt-3">Edit</button>
+                <button class="rounded-xl bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-red-500 mt-3 ml-3">Delete</button>
+            </div>
         </div>
         <div class="w-2/3 h-full">
             <div class="w-full">
@@ -30,18 +34,21 @@ import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import BlogCard from '@/components/BlogCard.vue'
+import { computed } from '@vue/reactivity'
 
 export default {
     props: ['id'],
     components: { BlogCard },
     setup(props) {
-        const { pet, error } = getPetDetail('petDetail', props.id)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        const { pet, error } = getPetDetail('petDetail', props.id)
 
-        // ! Computed is owner?
+        const isOwnership = computed(() => {
+            return pet.value && userDetail.value && pet.value.ownerDocID == userDetail.value.docId
+        })
 
-        return { pet, error }
+        return { pet, error, isOwnership }
     }
 }
 </script>
