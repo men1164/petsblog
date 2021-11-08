@@ -33,11 +33,11 @@
 
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">Cancel</button>
+      <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Cancel</button>  
     </div>
 
     <div class="w-full md:w-1/2 px-3">
-      <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">Create</button>
+      <button class="create mx-8 py-2.5 p-10 text-black text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Create</button>
     </div>
   </div>
   </div>
