@@ -7,6 +7,7 @@ import HomeBlog from '../views/blogs/HomeBlog.vue'
 import FollowingBlog from '../views/blogs/FollowingBlog.vue'
 import CreatePet from '../views/users/CreatePet.vue'
 import UserInfo from '../views/users/UserInfo.vue'
+import CreateBlog from '../views/blogs/CreateBlog.vue'
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/createblog',
+    name: 'CreateBlog',
+    component: CreateBlog
   },
   {
     path: '/userinfo',
