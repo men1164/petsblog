@@ -2,10 +2,9 @@
   <div class="max-w-lg h-auto mx-auto my-0 flex flex-col justify-center items-center">
       <p class="font-bold text-4xl text-white">Pet Profile</p>
       <img class="w-56 h-56 mt-8 rounded-full object-cover" src="https://timesofindia.indiatimes.com/photo/67586673.cms">
-      <p class="font-medium mt-2 text-white">Edit</p>
 
 
-  <form class="w-full max-w-lg">
+  <form class="mt-5 w-full max-w-lg">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <p class="font-bold text-1xl text-white">Name</p>
