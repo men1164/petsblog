@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50">
+  <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50 mb-10">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0 text-white">
       <router-link :to="{ name: 'HomeBlog' }">
         <p class="font-bold text-xl text-white">Navbar</p>
