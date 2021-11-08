@@ -3,7 +3,7 @@
         <div class="pet-profile bg-white bg-opacity-25 rounded-3xl w-1/3 h-full text-center p-6 shadow-xl mb-10">
             <img class="my-3 mx-auto object-cover w-40 h-40 rounded-full" :src="pet.photoURL">
             <form class="text-black my-3" v-if="isEdit">
-                <input type="text" v-model="newPetsName">
+                <input type="text" class="focus:outline-none" v-model="newPetsName">
             </form>
             <p class="font-semibold text-xl mb-2" v-else>{{ pet.petsName }}</p>
             <p class="text-base">Owner: {{ pet.ownerName }}</p>
