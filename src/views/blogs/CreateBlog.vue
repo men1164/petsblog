@@ -19,10 +19,8 @@
                     <p class="font-medium text-base">Owner: { OwnerName }</p>
                 </div>
             </div>
-            <div class="flex mt-5">
-                <form class="w-full items-center">
-                    <textarea class="w-full border-b-2 focus:outline-none" placeholder="Write your body.."></textarea>
-                </form>
+            <div class="flex mt-5 mx-16">
+                <textarea class="w-full border-b-2 focus:outline-none" placeholder="Write your body.."></textarea>
             </div>
             <div class="flex flex-row justify-center my-5">
                 <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Cancel</button>  
