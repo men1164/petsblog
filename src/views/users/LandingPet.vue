@@ -40,6 +40,7 @@
 import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
+import usePet from '@/composables/usePet'
 import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
 
@@ -50,6 +51,7 @@ export default {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { pet, error } = getPetDetail('petDetail', props.id)
+        const { updatePetName } = usePet('petDetail')
         const isEdit = ref(false)
         const newPetsName = ref(null)
 
@@ -58,11 +60,14 @@ export default {
         })
 
         const toggleForm = () => {
+            newPetsName.value = null
             isEdit.value = !isEdit.value
         }
 
-        const submitEdit = () => {
-            console.log(newPetsName.value)
+        const submitEdit = async () => {
+            const inputName = newPetsName.value[0].toUpperCase() + newPetsName.value.slice(1)
+            await updatePetName(pet.value.docId, inputName)
+            isEdit.value = false
         }
 
         return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit }

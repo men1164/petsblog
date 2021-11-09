@@ -8,7 +8,7 @@ const getPets = (collectionName, query) => {
     const collectionRef = collection(projectFirestore, collectionName)
 
     // if(query) {
-
+    // ! Query for 'Your Pet' page
     // }
 
     const unsub = onSnapshot(collectionRef, snap => {

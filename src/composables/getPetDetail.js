@@ -8,7 +8,7 @@ const getPetDetail = (collectionName, id) => {
     const docRef = doc(projectFirestore, collectionName, id)
 
     const unsub = onSnapshot(docRef, snap => {
-        pet.value = snap.data()
+        pet.value = { ...snap.data(), docId: snap.id }
         error.value = null
     }, (err) => {
         console.log(err.message)

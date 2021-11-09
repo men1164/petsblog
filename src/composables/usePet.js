@@ -38,7 +38,25 @@ const usePet = (collectionName) => {
         }
     }
 
-    return { isPending, error, createPet, updatePetPhotoURL }
+    const updatePetName = async (id, name) => {
+        error.value = null
+        isPending.value = true
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            await updateDoc(docRef, {
+                petsName: name
+            })
+            isPending.value = false
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = "Could not update your pet's name!"
+            isPending.value = false
+        }
+    }
+
+    return { isPending, error, createPet, updatePetPhotoURL, updatePetName }
 }
 
 export default usePet
