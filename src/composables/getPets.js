@@ -2,13 +2,13 @@ import { collection, onSnapshot } from '@firebase/firestore'
 import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
-const getPets = (collectionName, query) => {
+const getPets = (collectionName, query, mode) => {
     const error = ref(null)
     const pets = ref(null)
     const collectionRef = collection(projectFirestore, collectionName)
 
-    // if(query) {
-    // ! Query for 'Your Pet' page
+    // if(query && mode === 'yourPet') {
+    // ! Query for 'Your Pet' page and 'Following' page
     // }
 
     const unsub = onSnapshot(collectionRef, snap => {
