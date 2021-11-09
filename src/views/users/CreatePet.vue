@@ -42,11 +42,11 @@ export default {
         const breed = ref('')
         const file = ref(null)
         const fileError = ref(null)
-        const { isPending, error, createPet, updatePetPhotoURL } = usePet('petDetail')
+        const { isPending, error, create, updatePhotoURL } = usePet('petDetail')
         const { addPet } = useUserDetail('userDetail')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { url, uploadImage } = useStorage()
+        const { url, filePath, uploadImage } = useStorage()
         const previewURL = ref(null)
 
         const handleCreatePet = async () => {
@@ -60,17 +60,18 @@ export default {
                 gender: gender.value,
                 breed: capitalizeBreed,
                 photoURL: '',
+                filePath: '',
                 ownerDocID: userDetail.value.docId,
                 ownerName: user.value.displayName,
                 blogID: []
             }
 
             if(file.value) {
-                const res = await createPet(petDoc)
+                const res = await create(petDoc)
                 // console.log(res.id)
-                await addPet(userDetail.value.docId, res.id)
+                await addPet(userDetail.value.docId, res.id) // ! Maybe don't need it
                 await uploadImage(file.value, res.id, 'petImg')
-                await updatePetPhotoURL(res.id, url.value)
+                await updatePhotoURL(res.id, url.value, filePath.value)
                 // route to pet profile landing page
             }
             else {

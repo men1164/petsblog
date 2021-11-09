@@ -16,7 +16,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/home',
+    path: '/explore',
     name: 'HomeBlog',
     component: HomeBlog
   },
@@ -48,9 +48,10 @@ const routes = [
     component: Login
   },
   {
-    path: '/createblog',
+    path: '/blog/createblog',
     name: 'CreateBlog',
-    component: CreateBlog
+    component: CreateBlog,
+    props: true
   },
   {
     path: '/userinfo',

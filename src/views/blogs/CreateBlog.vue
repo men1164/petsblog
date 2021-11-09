@@ -1,57 +1,128 @@
 <template>
     <div class="mx-auto flex flex-col jusify-center items-center relative h-full">
-        <p class="font-bold text-4xl text-white">Create Blog</p>
-        <img class="mt-2 w-full object-cover h-80" src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3029&q=80" alt="Banner" width="1920" height="288">
+        <p class="font-bold text-4xl text-white">Create Blog for {{ pet.petsName }}</p>
+        <img class="mt-2 w-full object-cover h-80" :src="pet.photoURL" alt="Banner" width="1920" height="288">
         <div class="absolute flex flex-row top-80 hover:bg-white bg-white w-1/2 p-4 rounded-2xl h-24 shadow-lg">
-            <div class="flex flex-col">
-                <input type="text" class="w-full font-bold text-2xl mx-2 focus:outline-none" placeholder="Title...">
-                <p class="mt-8 mx-2 absolute font-bold text-xl">#</p>
-            </div>
-            <div class="follow ml-auto h-full bg-gray-300 p-2 rounded-2xl text-center">
-                <p>O k</p>
-                <p>Followers</p>
+            <div class="flex flex-col w-full h-full">
+                <input type="text" class="w-full font-bold text-2xl mx-2 focus:outline-none" placeholder="Title..." v-model="title" required>
+                <!-- <p class="mt-8 mx-2 absolute font-bold text-xl">#</p> -->
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
             <div class="mt-12 mx-4 flex items-center"> 
                 <img class="profile w-16 h-16 rounded-full shadow-lg object-cover" src="https://images.unsplash.com/photo-1611558709798-e009c8fd7706?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=782&q=80">
                 <div class="ml-3">
-                    <p class="font-medium text-base">Owner: { OwnerName }</p>
+                    <p class="font-medium text-base" v-if="pet">Owner: {{ pet.ownerName }}</p>
                 </div>
             </div>
-            <div class="flex mt-5 mx-16">
-                <textarea class="w-full border-b-2 focus:outline-none" placeholder="Write your body.."></textarea>
+            <div class="flex flex-col mt-5 mx-16">
+                <textarea class="w-full h-full border-b-2 focus:outline-none" rows="10" placeholder="Write your body.." v-model="body" required></textarea>
+                <div class="flex flex-row mt-4 items-center">
+                    <p>Upload photo for this blog: </p>
+                    <input class="ml-3" type="file" @change="handleChange" required>
+                </div>
+                <!-- <span class="textarea w-full focus:outline-none" role="textbox" contenteditable>
+                    <input type="text" class="hidden">
+                </span> -->
             </div>
             <div class="flex flex-row justify-center my-5">
                 <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Cancel</button>  
-                <button class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Create</button>
+                <button class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="submitBlog">Create</button>
             </div>
+            <p class="text-red-400 text-center">{{ fileError }}</p>
+            <p class="text-red-400 text-center">{{ error }}</p>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+import { ref } from '@vue/reactivity'
+import getPetDetail from '@/composables/getPetDetail'
+import usePet from '@/composables/usePet'
+import useStorage from '@/composables/useStorage'
+import { serverTimestamp } from 'firebase/firestore'
 
+export default {
+    props: ['id'],
+    setup(props) {
+        const body = ref(null)
+        const title = ref(null)
+        const { pet } = getPetDetail('petDetail', props.id)
+        const { isPending, error, create, updatePhotoURL } = usePet('petBlog')
+        const { url, filePath, uploadImage } = useStorage()
+        const file = ref(null)
+        const fileError = ref(null)
+
+        const submitBlog = async () => {
+            const docBlog = {
+                title: title.value,
+                body: body.value,
+                photoURL: '',
+                filePath: '',
+                petDocID: props.id,
+                petsName: pet.value.petsName,
+                createAt: serverTimestamp()
+            }
+
+            if(file.value) {
+                const res = await create(docBlog)
+                await uploadImage(file.value, res.id, 'blogImg')
+                await updatePhotoURL(res.id, url.value, filePath.value)
+            }
+            else if(!title.value || !body.value) {
+                fileError.value = null
+                error.value = 'Please enter information before submit!'
+            }
+            else {
+                error.value = null
+                fileError.value = 'Please select an image file (png or jpg)'
+            }
+        }
+
+        const types = ['image/png', 'image/jpeg']
+
+        const handleChange = e => {
+            const selected = e.target.files[0]
+
+            if(selected && types.includes(selected.type)) {
+                file.value = selected
+                // previewURL.value = URL.createObjectURL(file.value)
+                fileError.value = null
+            }
+            else {
+                file.value = null
+                fileError.value = 'Please select an image file (png or jpg)'
+                console.log(fileError.value)
+            }
+        }
+
+        return { body, submitBlog, pet, title, handleChange, fileError, error }
+    }
 }
 </script>
 
 <style scoped>
- .profile:hover {
-     box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.2);
-     transform: scale(1.01);
-     transition: all ease 0.2s;
- }
+/* .profile:hover {
+    box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.2);
+    transform: scale(1.01);
+    transition: all ease 0.2s;
+} */
 
- .cancel:hover {
-     box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.3);
-     transform: scale(1.03);
-     transition: all ease 0.2s;
- }
+.cancel:hover {
+    box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.3);
+    transform: scale(1.03);
+    transition: all ease 0.2s;
+}
 
- .create:hover {
-     box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.3);
-     transform: scale(1.03);
-     transition: all ease 0.2s;
- }
+.create:hover {
+    box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.3);
+    transform: scale(1.03);
+    transition: all ease 0.2s;
+}
+
+/* Auto height textarea (span) */
+/* .textarea[contenteditable]:empty::before {
+    content: "Write your body...";
+    color: gray;
+} */
 </style>

@@ -7,12 +7,13 @@ const usePet = (collectionName) => {
     const isPending = ref(false)
     const error = ref(null)
     
-    const createPet = async (doc) => {
+    const create = async (doc) => {
         isPending.value = true
         error.value = null
+        const collectionRef = collection(projectFirestore, collectionName)
 
         try {
-            const res = await addDoc(collection(projectFirestore, collectionName), doc)
+            const res = await addDoc(collectionRef, doc)
             isPending.value = false
             return res
         }
@@ -23,13 +24,14 @@ const usePet = (collectionName) => {
         }
     }
 
-    const updatePetPhotoURL = async (id, url) => {
+    const updatePhotoURL = async (id, url, path) => {
         error.value = null
         const docRef = doc(projectFirestore, collectionName, id)
         
         try {
             await updateDoc(docRef, {
-                photoURL: url
+                photoURL: url,
+                filePath: path
             })
         }
         catch(err) {
@@ -56,7 +58,7 @@ const usePet = (collectionName) => {
         }
     }
 
-    return { isPending, error, createPet, updatePetPhotoURL, updatePetName }
+    return { isPending, error, create, updatePhotoURL, updatePetName }
 }
 
 export default usePet

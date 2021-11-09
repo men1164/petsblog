@@ -21,7 +21,7 @@
         <div class="w-2/3 h-full">
             <div class="w-full flex flex-col">
                 <p class="font-semibold text-lg text-white border-b-2">Blogs from {{ pet.petsName }} !</p>
-                <router-link :to="{ name: 'CreateBlog' }">
+                <router-link :to="{ name: 'CreateBlog', params: { id: pet.docId } }">
                     <button v-if="isOwnership" class="flex items-center w-28 h-auto ml-auto mt-2 p-2 bg-gray-100 shadow-md rounded-md text-blue-400 transform hover:scale-110 transition-transform">
                         <svg class="h-5 w-5" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
