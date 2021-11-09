@@ -3,7 +3,6 @@
         <router-link :to="{ name: 'LandingPet', params: { id: pet.docId } }">
             <div class="flex flex-col w-full h-full">
                 <div class="w-full h-2/3 relative">
-                    <img class="absolute top-1 right-3 h-10 w-10" src="@/assets/new.png">
                     <img class="h-full w-full object-cover rounded-t-3xl" :src="pet.photoURL">
                 </div>
                 <div class="w-full h-1/3 text-left pl-5 pt-3">

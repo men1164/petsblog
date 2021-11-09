@@ -56,7 +56,7 @@ export default {
                     ownPetsID: [],
                     readingLists: []
                 }
-                const resDetail = initDetail(initDoc)
+                const resDetail = await initDetail(initDoc)
                 if(resDetail) {
                     console.log(resDetail)
                 }
