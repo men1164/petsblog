@@ -9,10 +9,10 @@
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
-            <div class="mt-12 mx-4 flex items-center"> 
-                <img class="profile w-16 h-16 rounded-full shadow-lg object-cover" src="https://images.unsplash.com/photo-1611558709798-e009c8fd7706?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=782&q=80">
-                <div class="ml-3">
-                    <p class="font-medium text-base" v-if="pet">Owner: {{ pet.ownerName }}</p>
+            <div class="mt-20 mx-4 flex items-center"> 
+                <!-- <img class="profile w-16 h-16 rounded-full shadow-lg object-cover" src="https://images.unsplash.com/photo-1611558709798-e009c8fd7706?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=782&q=80"> -->
+                <div class="ml-12">
+                    <p class="font-medium text-base" v-if="pet">Written By: {{ pet.ownerName }}</p>
                 </div>
             </div>
             <div class="flex flex-col mt-5 mx-16">
@@ -27,7 +27,7 @@
                 </span> -->
             </div>
             <div class="flex flex-row justify-center my-5">
-                <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Cancel</button>  
+                <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="handleCancel">Cancel</button>  
                 <button class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="submitBlog">Create</button>
             </div>
             <p class="text-red-400 text-center">{{ fileError }}</p>
@@ -42,6 +42,7 @@ import getPetDetail from '@/composables/getPetDetail'
 import usePet from '@/composables/usePet'
 import useStorage from '@/composables/useStorage'
 import { serverTimestamp } from 'firebase/firestore'
+import { useRouter } from 'vue-router'
 
 export default {
     props: ['id'],
@@ -54,6 +55,7 @@ export default {
         const file = ref(null)
         const fileError = ref(null)
         const previewURL = ref(null)
+        const router = useRouter()
 
         const submitBlog = async () => {
             const docBlog = {
@@ -99,7 +101,11 @@ export default {
             }
         }
 
-        return { body, submitBlog, pet, title, handleChange, fileError, error, previewURL }
+        const handleCancel = () => {
+            router.go(-1)
+        }
+
+        return { body, submitBlog, pet, title, handleChange, fileError, error, previewURL, handleCancel }
     }
 }
 </script>

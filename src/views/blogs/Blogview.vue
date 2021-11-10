@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="flex flex-col mt-5 mx-16">
-                <p class="w-full h-full" v-for="line in blog.body.split('\n')" :key="line">{{ line }}<br></p>
-                <img class="w-2/3 h-auto mx-auto my-4 shadow-lg rounded-2xl" :src="blog.photoURL">
+                <p class="w-full h-full" v-for="paragraph in blog.body.split('\n')" :key="paragraph">{{ paragraph }}<br></p>
+                <img class="w-2/3 h-auto mx-auto my-10 shadow-lg rounded-2xl" :src="blog.photoURL">
                 <!-- <span class="textarea w-full focus:outline-none" role="textbox" contenteditable>
                     <input type="text" class="hidden">
                 </span> -->
