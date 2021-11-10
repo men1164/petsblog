@@ -2,9 +2,9 @@ import { collection, onSnapshot } from '@firebase/firestore'
 import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
-const getPets = (collectionName, query, mode) => {
+const getPetsOrBlogs = (collectionName, query, mode) => {
     const error = ref(null)
-    const pets = ref(null)
+    const data = ref(null)
     const collectionRef = collection(projectFirestore, collectionName)
 
     // if(query && mode === 'yourPet') {
@@ -17,16 +17,16 @@ const getPets = (collectionName, query, mode) => {
             results.push({ ...doc.data(), docId: doc.id })
         })
         if(results.length != 0) {
-            pets.value = results
+            data.value = results
         }
         else {
-            pets.value = null
+            data.value = null
         }
         error.value = null
     }, (err) => {
         console.log(err.message)
-        pets.value = null
-        error.value = 'Could not fetch the pets data!'
+        data.value = null
+        error.value = 'Could not fetch the data!'
     })
 
     watchEffect(onValidate => {
@@ -35,7 +35,7 @@ const getPets = (collectionName, query, mode) => {
         })
     })
 
-    return { pets, error }
+    return { data, error }
 }
 
-export default getPets
+export default getPetsOrBlogs

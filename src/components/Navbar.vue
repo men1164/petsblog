@@ -5,7 +5,7 @@
         <img class="w-9 h-9 mr-2" src="@/assets/logo.png">
         <p class="font-bold text-xl text-white">Pets Blog</p>
       </router-link>
-      <div v-if="user" class="ml-14 font-medium">
+      <div v-if="user" class="ml-11 font-medium">
         <router-link class="text-gray-300 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'FollowingBlog' }">Following</router-link>
         <!-- <router-link>Your Pet</router-link>
         <router-link>Following</router-link> -->
