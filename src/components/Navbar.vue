@@ -1,8 +1,9 @@
 <template>
   <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50 mb-10">
     <nav class="flex items-center h-10 max-w-7xl mx-auto my-0 text-white">
-      <router-link :to="{ name: 'HomeBlog' }">
-        <p class="font-bold text-xl text-white">Navbar</p>
+      <router-link class="flex items-center" :to="{ name: 'Explore' }">
+        <img class="w-9 h-9 mr-2" src="@/assets/logo.png">
+        <p class="font-bold text-xl text-white">Pets Blog</p>
       </router-link>
       <div v-if="user" class="ml-14 font-medium">
         <router-link class="text-gray-300 transition duration-300 ease-in-out hover:text-white focus:text-white" :to="{ name: 'FollowingBlog' }">Following</router-link>

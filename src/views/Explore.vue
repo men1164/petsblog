@@ -12,7 +12,7 @@
         <BlogCardSM />
     </div>
     <div class="ml-20 mt-10">
-        <p class="text-white font-semibold text-lg">New Blog from our members!</p>
+        <p class="text-white font-semibold text-lg">Explore our members!</p>
     </div>
     <div class="petcard flex px-20 pt-4 pb-10 w-full overflow-x-auto">
         <PetCard v-if="pets" :pets="pets" />

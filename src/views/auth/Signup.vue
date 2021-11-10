@@ -62,7 +62,7 @@ export default {
                 }
                 if(!error.value) {
                     console.log('SignUp Success')
-                    // * TODO: push router to HomeBlog
+                    // * TODO: push router to Explore
                     // router.push({ name: 'UserPlaylists' })
                 }
                 // console.log(user.value)
