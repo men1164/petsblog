@@ -57,6 +57,11 @@ const routes = [
     path: '/userinfo',
     name: 'UserInfo',
     component: UserInfo
+  },
+  {
+    path: '/createpet',
+    name: 'CreatePet',
+    component: CreatePet
   }
 ]
 

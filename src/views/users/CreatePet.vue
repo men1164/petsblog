@@ -1,29 +1,46 @@
 <template>
-    <!-- Mockup Form -->
-    <form @submit.prevent="handleCreatePet" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
-        <h3>Create Pet</h3>
-        <div v-if="!file" class="w-28 h-28 rounded-full object-cover mx-auto">
-            <img class="transform scale-75" src="@/assets/pawprint.png">
-        </div>
-        <div v-else>
-            <img class="w-28 h-28 rounded-full object-cover mx-auto" :src="previewURL">
-        </div>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" type="text" placeholder="Pet's Name" v-model="petsName" required>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="text" placeholder="Breed" v-model="breed" required>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="number" placeholder="Age (Years old)" v-model="age" required>
-        <select class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-2" v-model="gender" required>
-            <option value="" disabled>Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <p>Pet's Profile Picture:</p>
-        <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto" type="file" placeholder="Password" @change="handleChange" required>
-        <div class="text-sm text-red-500" v-if="error">{{ error }}</div>
-        <div class="text-sm text-red-500" v-if="fileError">{{ fileError }}</div>
-        <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="!isPending">Create Pet</button>
-        <button class="mt-5 rounded-xl bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3" v-if="isPending" disabled>Loading</button>
-    </form>
-    <!-- Mockup Form -->
+  <div class="max-w-lg h-auto mx-auto my-0 flex flex-col justify-center items-center">
+      <p class="font-bold text-4xl text-white">Pet Profile</p>
+      <img class="w-56 h-56 mt-8 rounded-full object-cover" src="https://timesofindia.indiatimes.com/photo/67586673.cms">
+
+
+  <form class="mt-5 w-full max-w-lg">
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <p class="font-bold text-1xl text-white">Name</p>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Cha Thai">
+    </div>
+
+    <div class="w-full md:w-1/2 px-3">
+      <p class="font-bold text-1xl text-white">Age</p>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="3 Years old">
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <p class="font-bold text-1xl text-white">Breed</p>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="American Shortthair">
+    </div>
+
+    <div class="w-full md:w-1/2 px-3">
+      <p class="font-bold text-1xl text-white">Gender</p>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Female">
+    </div>
+  </div>
+  </form>
+
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Cancel</button>  
+    </div>
+
+    <div class="w-full md:w-1/2 px-3">
+      <button class="create mx-8 py-2.5 p-10 text-black text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg">Create</button>
+    </div>
+  </div>
+  </div>
+
 </template>
 
 <script>
