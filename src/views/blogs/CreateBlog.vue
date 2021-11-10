@@ -17,6 +17,7 @@
             </div>
             <div class="flex flex-col mt-5 mx-16">
                 <textarea class="w-full h-full border-b-2 focus:outline-none" rows="10" placeholder="Write your body.." v-model="body" required></textarea>
+                <img v-if="previewURL" class="w-1/2 h-auto mx-auto my-4 shadow-lg rounded-2xl" :src="previewURL">
                 <div class="flex flex-row mt-4 items-center">
                     <p>Upload photo for this blog: </p>
                     <input class="ml-3" type="file" @change="handleChange" required>
@@ -52,6 +53,7 @@ export default {
         const { url, filePath, uploadImage } = useStorage()
         const file = ref(null)
         const fileError = ref(null)
+        const previewURL = ref(null)
 
         const submitBlog = async () => {
             const docBlog = {
@@ -87,7 +89,7 @@ export default {
 
             if(selected && types.includes(selected.type)) {
                 file.value = selected
-                // previewURL.value = URL.createObjectURL(file.value)
+                previewURL.value = URL.createObjectURL(file.value)
                 fileError.value = null
             }
             else {
@@ -97,7 +99,7 @@ export default {
             }
         }
 
-        return { body, submitBlog, pet, title, handleChange, fileError, error }
+        return { body, submitBlog, pet, title, handleChange, fileError, error, previewURL }
     }
 }
 </script>
