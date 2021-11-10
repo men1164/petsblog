@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="w-2/3 h-full">
-            <div class="w-full flex flex-col">
-                <p class="font-semibold text-lg text-white border-b-2">Blogs from {{ pet.petsName }} !</p>
+            <div class="w-full flex flex-row justify-between items-end">
+                <p class="font-semibold text-lg text-white">Blogs from {{ pet.petsName }} !</p>
                 <router-link :to="{ name: 'CreateBlog', params: { id: pet.docId } }">
                     <button v-if="isOwnership" class="flex items-center w-28 h-auto ml-auto mt-2 p-2 bg-gray-100 shadow-md rounded-md text-blue-400 transform hover:scale-110 transition-transform">
                         <svg class="h-5 w-5" fill="currentColor">
@@ -30,7 +30,8 @@
                     </button>
                 </router-link>
             </div>
-            <div class="my-4">
+            <div class="border-b-2 mt-2"></div>
+            <div class="my-4 mb-16">
                 <BlogCard :blogs="blogs" v-if="blogs" />
             </div>
         </div>

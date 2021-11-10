@@ -1,20 +1,25 @@
 <template>
-    <div class="card flex flex-row items-center bg-white rounded-3xl w-full h-28 mb-7 shadow-lg">
+    <div v-for="blog in blogs" :key="blog.docId" class="card flex flex-row items-center bg-white rounded-3xl w-full h-28 mb-7 shadow-lg">
         <div class="w-1/4 h-full">
             <img class="w-full h-full object-cover rounded-l-3xl" src="@/assets/demo-petcard.jpg">
         </div>
-        <div class="flex flex-col w-3/5 h-full p-3 ml-2">
-            <p class="font-semibold text-2xl mb-2 truncate">{ Pet's Name }: Yayyyyyyy asdasdasdasdasdasdadasdaddadasd</p>
-            <p class="font-normal text-base">Owner: { OwnerName }</p>
-            <p class="font-normal text-base truncate">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem officia adipisci reprehenderit maiores sapiente? Laborum ab aspernatur odio soluta nulla vero eius, blanditiis porro a nisi repellendus, excepturi repellat saepe!</p>
+        <div class="flex flex-col max-w-lg h-full p-3 ml-2">
+            <p class="font-semibold text-2xl mb-2 truncate">[{{ blog.petsName }}]: {{ blog.title }}</p>
+            <p class="font-normal text-base">Owner: {{ blog.ownerName }}</p>
+            <p class="font-normal text-base truncate">{{ blog.body }}</p>
         </div>
-        <p class="ml-9 text-sm text-gray-400">3 days ago</p>
+        <p class="text-sm mx-4 max-w-xs text-gray-400">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
     </div>
 </template>
 
 <script>
-export default {
+import { formatDistanceToNow } from 'date-fns'
 
+export default {
+    props: ['blogs'],
+    setup() {
+        return { formatDistanceToNow }
+    }
 }
 </script>
 
