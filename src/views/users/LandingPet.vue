@@ -31,14 +31,7 @@
                 </router-link>
             </div>
             <div class="my-4">
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
+                <BlogCard :blogs="blogs" v-if="blogs" />
             </div>
         </div>
     </div>
@@ -48,6 +41,7 @@
 import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
+import getPetsOrBlogs from '@/composables/getPetsOrBlogs'
 import usePet from '@/composables/usePet'
 import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
@@ -58,6 +52,7 @@ export default {
     setup(props) {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        const { data: blogs } = getPetsOrBlogs('petBlog', props.id, 'byId')
         const { pet, error } = getPetDetail('petDetail', props.id)
         const { updatePetName } = usePet('petDetail')
         const isEdit = ref(false)
@@ -78,7 +73,7 @@ export default {
             isEdit.value = false
         }
 
-        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit }
+        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit, blogs }
     }
 }
 </script>
