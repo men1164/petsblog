@@ -8,6 +8,7 @@ import FollowingBlog from '../views/blogs/FollowingBlog.vue'
 import CreatePet from '../views/users/CreatePet.vue'
 import UserInfo from '../views/users/UserInfo.vue'
 import CreateBlog from '../views/blogs/CreateBlog.vue'
+import Blogview from '../views/blogs/Blogview.vue'
 
 const routes = [
   {
@@ -42,7 +43,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/blog/createblog',
+    path: '/blog/create',
     name: 'CreateBlog',
     component: CreateBlog,
     props: true
@@ -53,9 +54,15 @@ const routes = [
     component: UserInfo
   },
   {
-    path: '/createpet',
+    path: '/pet/creat',
     name: 'CreatePet',
-    component: CreatePet
+    component: CreatePet,
+  },
+  {
+    path: '/blog/:blogId',
+    name: 'Blogview',
+    component: Blogview,
+    props: true
   }
 ]
 
