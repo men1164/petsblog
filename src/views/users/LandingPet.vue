@@ -31,7 +31,10 @@
                 </router-link>
             </div>
             <div class="border-b-2 mt-2"></div>
-            <div class="my-4 mb-16">
+            <div v-if="!blogs" class="mx-auto text-center font-semibold text-white my-10">
+                <p>Let's create the first blog for {{ pet.petsName }}!</p>
+            </div>
+            <div v-else class="my-4 mb-16">
                 <BlogCard :blogs="blogs" v-if="blogs" />
             </div>
         </div>
