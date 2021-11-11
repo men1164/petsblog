@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
-            <div class="mt-20 mx-4 flex items-center"> 
+            <div class="mt-16 mx-4 flex items-center"> 
                 <!-- <img v-if="userDetail" class="profile w-16 h-16 rounded-full shadow-lg object-cover" :src="userDetail.photoURL"> -->
                 <div class="ml-12">
                     <p class="font-semibold text-lg">Written by: {{ pet.ownerName }}</p>
@@ -23,9 +23,13 @@
                 </span> -->
             </div>
         <!-- ! Comment Section -->
-            <div class="w-full mx-16">
+            <div class="mx-16">
                 <p class="font-bold text-2xl">Comments</p>
-                <Comment />
+                <div class="border-b-2 border-gray-300"></div>
+                <div v-if="!comments">
+                    <p class="py-7 font-regualr text-base text-gray-400">Be the first one to Comment!</p>
+                </div>
+                <Comment :comments="comments" :blogId="toBlogId" />
             </div>
         </div>
     </div>
@@ -35,6 +39,7 @@
 import Comment from '@/components/Comment.vue'
 import getPetDetail from '@/composables/getPetDetail'
 import getBlogDetail from '@/composables/getBlogDetail'
+import getComments from '@/composables/getComments'
 
 export default {
     components: { Comment },
@@ -42,8 +47,11 @@ export default {
     setup(props) {
         const { blog } = getBlogDetail('petBlog', props.blogId)
         const { pet } = getPetDetail('petDetail', props.petId)
+        const { comments } = getComments('comments', props.blogId)
 
-        return { blog, pet }
+        const toBlogId = props.blogId
+
+        return { blog, pet, comments, toBlogId }
     }
 }
 </script>

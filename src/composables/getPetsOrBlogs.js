@@ -19,7 +19,7 @@ const getPetsOrBlogs = (collectionName, queryOrId, mode) => {
         const unsub = onSnapshot(q, snap => {
             let results = []
             snap.docs.forEach(doc => {
-                results.push({ ...doc.data(), docId: doc.id })
+                doc.data().createAt && results.push({ ...doc.data(), docId: doc.id })
             })
             console.log(results)
             if(results.length != 0) {
