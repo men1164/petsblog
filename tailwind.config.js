@@ -10,7 +10,8 @@ module.exports = {
       },
       minWidth: {
         'cardWidth': '275px',
-        'cardWidth-sm': '300px'
+        'cardWidth-sm': '300px',
+        '1/2': '50%'
       },
       minHeight: {
         'cardHeight': '400px',

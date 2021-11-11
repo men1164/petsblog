@@ -66,6 +66,8 @@ export default {
                 petDocID: props.id,
                 petsName: pet.value.petsName,
                 ownerName: pet.value.ownerName,
+                comments: [],
+                likes: 0,
                 createAt: serverTimestamp()
             }
 
