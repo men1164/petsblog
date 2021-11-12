@@ -26,7 +26,7 @@
             <div class="mx-16">
                 <p class="font-bold text-2xl">Comments</p>
                 <div class="border-b-2 border-gray-300"></div>
-                <Comment :blogId="toBlogId" />
+                <Comment :blogId="blogId" />
             </div>
         </div>
     </div>
@@ -43,11 +43,8 @@ export default {
     setup(props) {
         const { blog } = getBlogDetail('petBlog', props.blogId)
         const { pet } = getPetDetail('petDetail', props.petId)
-        
 
-        const toBlogId = props.blogId
-
-        return { blog, pet, toBlogId }
+        return { blog, pet }
     }
 }
 </script>
