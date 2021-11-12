@@ -1,5 +1,8 @@
 <template>
-    <div v-for="comment in comments" :key="comment.docId" class="flex flex-col w-full h-auto py-4 border-dotted border-b-2 border-gray-300">
+    <div v-if="!comments">
+        <p class="py-7 font-regualr text-base text-gray-400">Be the first one to Comment!</p>
+    </div>
+    <div v-else v-for="comment in comments" :key="comment.docId" class="flex flex-col w-full h-auto py-4 border-dotted border-b-2 border-gray-300">
         <div class="flex items-center">
             <img :src="comment.photoURL" class="w-12 h-12 object-cover rounded-full">
             <div class="ml-4">
@@ -22,16 +25,18 @@
 <script>
 import { formatDistanceToNow } from 'date-fns'
 import getUser from '@/composables/getUser'
+import getComments from '@/composables/getComments'
 import useComment from '@/composables/useComment'
 import { ref } from '@vue/reactivity'
 import { serverTimestamp } from '@firebase/firestore'
 
 export default {
-    props: ['comments', 'blogId'],
+    props: ['blogId'],
     setup(props){
         const { user } = getUser()
         const { error, isPending, addComment } = useComment('comments')
         const newComment = ref('')
+        const { comments } = getComments('comments', props.blogId)
         
         const handleSubmit = async () => {
             const commentDoc = {
@@ -46,7 +51,7 @@ export default {
                 newComment.value = ''
             }
         }
-        return { formatDistanceToNow, newComment, handleSubmit }
+        return { formatDistanceToNow, newComment, handleSubmit, comments }
     }
 }
 </script>

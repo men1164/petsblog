@@ -26,10 +26,7 @@
             <div class="mx-16">
                 <p class="font-bold text-2xl">Comments</p>
                 <div class="border-b-2 border-gray-300"></div>
-                <div v-if="!comments">
-                    <p class="py-7 font-regualr text-base text-gray-400">Be the first one to Comment!</p>
-                </div>
-                <Comment :comments="comments" :blogId="toBlogId" />
+                <Comment :blogId="toBlogId" />
             </div>
         </div>
     </div>
@@ -39,7 +36,6 @@
 import Comment from '@/components/Comment.vue'
 import getPetDetail from '@/composables/getPetDetail'
 import getBlogDetail from '@/composables/getBlogDetail'
-import getComments from '@/composables/getComments'
 
 export default {
     components: { Comment },
@@ -47,11 +43,11 @@ export default {
     setup(props) {
         const { blog } = getBlogDetail('petBlog', props.blogId)
         const { pet } = getPetDetail('petDetail', props.petId)
-        const { comments } = getComments('comments', props.blogId)
+        
 
         const toBlogId = props.blogId
 
-        return { blog, pet, comments, toBlogId }
+        return { blog, pet, toBlogId }
     }
 }
 </script>
