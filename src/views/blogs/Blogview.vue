@@ -18,25 +18,22 @@
             <div class="flex flex-col mt-5 mx-16">
                 <p class="w-full h-full" v-for="paragraph in blog.body.split('\n')" :key="paragraph">&emsp;&emsp;{{ paragraph }}<br></p>
                 <img class="w-2/3 h-auto mx-auto my-10 shadow-lg rounded-2xl" :src="blog.photoURL">
-                <!-- <span class="textarea w-full focus:outline-none" role="textbox" contenteditable>
-                    <input type="text" class="hidden">
-                </span> -->
             </div>
-            <!-- unlike state -->
-            <div class="mx-16 mb-5 flex items-center">
-                <svg @click="handleLike" class="h-8 w-8 text-gray-300 hover:text-blue-300 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+            <!-- if unlike state -->
+            <div v-if="!isLiked" class="mx-16 mb-5 flex items-center">
+                <svg @click="handleLike" class="h-9 w-9 text-gray-300 hover:text-blue-300 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                 </svg>
-                <p class="ml-1">48</p>
+                <p class="ml-1">{{ blog.likes }}</p>
             </div>
-            <!-- like state -->
-            <!-- <div class="mx-16 mb-5 flex items-center">
-                <svg @click="handleLike" class="h-8 w-8 text-blue-400 hover:text-blue-300 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+            <!-- if liked state -->
+            <div v-else class="mx-16 mb-5 flex items-center">
+                <svg @click="handleUnlike" class="h-9 w-9 text-blue-500 hover:text-blue-300 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                 </svg>
-                <p class="ml-1">48</p>
-            </div> -->
-        <!-- ! Comment Section -->
+                <p class="ml-1">{{ blog.likes }}</p>
+            </div>
+            <!-- ! Comment Component -->
             <div class="mx-16">
                 <p class="font-bold text-2xl">Comments</p>
                 <div class="border-b-2 border-gray-300"></div>
@@ -50,6 +47,11 @@
 import Comment from '@/components/Comment.vue'
 import getPetDetail from '@/composables/getPetDetail'
 import getBlogDetail from '@/composables/getBlogDetail'
+import getUser from '@/composables/getUser'
+import getUserDetail from '@/composables/getUserDetail'
+import usePet from '@/composables/usePet'
+import useUserDetail from '@/composables/useUserDetail'
+import { computed } from '@vue/reactivity'
 
 export default {
     components: { Comment },
@@ -57,16 +59,37 @@ export default {
     setup(props) {
         const { blog } = getBlogDetail('petBlog', props.blogId)
         const { pet } = getPetDetail('petDetail', props.petId)
+        const { user } = getUser()
+        const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        const { error, toggleLike } = usePet('petBlog')
+        const { likedBlogsAction } = useUserDetail('userDetail')
+        
+        const isLiked = computed(() => {
+            let res = false
+            let i
+            
+            if(userDetail.value) {
+                for(i=0; i < userDetail.value.likedBlogs.length; i++) {
+                    if(userDetail.value.likedBlogs[i] === props.blogId) {
+                        res = true
+                        break
+                    }
+                }
+            }
+            return res
+        })
 
-        const handleLike = () => {
-            console.log('like!')
+        const handleLike = async () => {
+            await toggleLike(props.blogId, 'like')
+            await likedBlogsAction(userDetail.value.docId, props.blogId, 'like')
         }
 
-        return { blog, pet, handleLike }
+        const handleUnlike = async () => {
+            await toggleLike(props.blogId, 'unlike')
+            await likedBlogsAction(userDetail.value.docId, props.blogId, 'unlike')
+        }
+
+        return { blog, pet, handleLike, handleUnlike, isLiked }
     }
 }
 </script>
-
-<style>
-
-</style>

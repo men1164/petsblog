@@ -1,5 +1,5 @@
 import { projectFirestore } from "../firebase/config"
-import { collection, addDoc, updateDoc, doc, arrayUnion } from "@firebase/firestore"
+import { collection, addDoc, updateDoc, doc, arrayUnion, arrayRemove } from "@firebase/firestore"
 import { ref } from 'vue'
 
 const useUserDetail = (collectionName) => {
@@ -48,7 +48,29 @@ const useUserDetail = (collectionName) => {
         }
     }
 
-    return { error, initDetail, userVerify, addPet }
+    const likedBlogsAction = async (id, blogId, action) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            if(action === 'like') {
+                await updateDoc(docRef, {
+                    likedBlogs: arrayUnion(blogId)
+                })
+            }
+            else {
+                await updateDoc(docRef, {
+                    likedBlogs: arrayRemove(blogId)
+                })
+            }
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = 'Could not push or pop the liked blogs field'
+        }
+    }
+
+    return { error, initDetail, userVerify, addPet, likedBlogsAction }
 }
 
 export default useUserDetail

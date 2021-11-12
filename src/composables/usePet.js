@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
-import { addDoc, collection, doc, updateDoc } from '@firebase/firestore'
+import { addDoc, collection, doc, increment, updateDoc } from '@firebase/firestore'
 
 
 const usePet = (collectionName) => {
@@ -58,7 +58,29 @@ const usePet = (collectionName) => {
         }
     }
 
-    return { isPending, error, create, updatePhotoURL, updatePetName }
+    const toggleLike = async (id, action) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            if(action === 'like') {
+                await updateDoc(docRef, {
+                    likes: increment(1)
+                })
+            }
+            else {
+                await updateDoc(docRef, {
+                    likes: increment(-1)
+                })
+            }
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = 'Cound not change likes amount in document'
+        }
+    }
+
+    return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike }
 }
 
 export default usePet
