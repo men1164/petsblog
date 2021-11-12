@@ -54,7 +54,7 @@ export default {
                     isVeterinarian: false,
                     follwedPets: [],
                     ownPetsID: [],
-                    readingLists: []
+                    likedBlogs: []
                 }
                 const resDetail = await initDetail(initDoc)
                 if(resDetail) {
