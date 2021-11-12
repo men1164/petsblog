@@ -4,13 +4,13 @@
             <div class="w-1/4 h-full">
                 <img class="w-full h-full object-cover rounded-l-3xl" :src="blog.photoURL">
             </div>
-            <div class="flex flex-col max-w-lg h-full p-3 ml-2">
+            <div class="flex flex-col w-1/2 max-w-lg h-full p-3 ml-2">
                 <p class="font-semibold text-2xl mb-2 truncate">[{{ blog.petsName }}]: {{ blog.title }}</p>
                 <p class="font-normal text-base">Owner: {{ blog.ownerName }}</p>
                 <p class="font-normal text-base w-full truncate">{{ blog.body }}</p>
             </div>
-            <div>
-                <p class="text-sm mx-4 max-w-xs text-gray-400">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
+            <div class="w-1/4 px-5">
+                <p class="text-sm text-right text-gray-400">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
             </div>
         </router-link>
     </div>
