@@ -11,8 +11,9 @@
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
             <div class="mt-16 mx-4 flex items-center"> 
                 <!-- <img v-if="userDetail" class="profile w-16 h-16 rounded-full shadow-lg object-cover" :src="userDetail.photoURL"> -->
-                <div class="ml-12">
+                <div class="ml-12 flex items-end">
                     <p class="font-semibold text-lg">Written by: {{ pet.ownerName }}</p>
+                    <p class="text-sm ml-4 text-gray-400 pb-0.5">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
                 </div>
             </div>
             <div class="flex flex-col mt-5 mx-16">
@@ -52,6 +53,7 @@ import getUserDetail from '@/composables/getUserDetail'
 import usePet from '@/composables/usePet'
 import useUserDetail from '@/composables/useUserDetail'
 import { computed } from '@vue/reactivity'
+import { formatDistanceToNow } from 'date-fns'
 
 export default {
     components: { Comment },
@@ -80,16 +82,16 @@ export default {
         })
 
         const handleLike = async () => {
-            await toggleLike(props.blogId, 'like')
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'like')
+            await toggleLike(props.blogId, 'like')
         }
 
         const handleUnlike = async () => {
-            await toggleLike(props.blogId, 'unlike')
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'unlike')
+            await toggleLike(props.blogId, 'unlike')
         }
 
-        return { blog, pet, handleLike, handleUnlike, isLiked }
+        return { blog, pet, handleLike, handleUnlike, isLiked, formatDistanceToNow }
     }
 }
 </script>
