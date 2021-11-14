@@ -9,13 +9,27 @@
             <p class="text-base">Owner: {{ pet.ownerName }}</p>
             <p class="text-base">Gender: {{ pet.gender }}</p>
             <p class="text-base">Breed: {{ pet.breed }}</p>
-            <div v-if="isOwnership && !isEdit">
-                <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-primary-green mt-3" @click="toggleForm">Edit</button>
-                <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-red-500 mt-3 ml-3">Delete</button>
+            <p class="text-base">Followers: {{ pet.followers }}</p>
+            <div v-if="isOwnership">
+                <div v-if="!isEdit">
+                    <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-primary-green mt-3" @click="toggleForm">Edit</button>
+                    <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-red-500 mt-3 ml-3">Delete</button>
+                </div>
+                <div v-else>
+                    <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-primary-green mt-3" @click="submitEdit">Submit</button>
+                    <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-red-500 mt-3 ml-3" @click="toggleForm">Cancel</button>
+                </div>
             </div>
-            <div v-if="isOwnership && isEdit">
-                <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-primary-green mt-3" @click="submitEdit">Submit</button>
-                <button class="rounded-xl bg-gray-200 hover:bg-gray-300 border-0 cursor-pointer inline-block py-2 px-3 shadow-md text-red-500 mt-3 ml-3" @click="toggleForm">Cancel</button>
+            <div v-else>
+                <div v-if="!isFollowing" @click="handleFollow" class="w-24 h-10 p-2 text-gray-500 bg-gray-200 hover:bg-gray-300 cursor-pointer mx-auto mt-4 rounded-lg shadow-lg">
+                    <p>Follow</p>
+                </div>
+                <div v-else @click="handleUnfollow" class="max-w-max flex h-10 p-2 text-white bg-blue-400 hover:bg-blue-300 cursor-pointer mx-auto mt-4 rounded-lg shadow-inner">
+                    <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <p>Following</p>
+                </div>
             </div>
         </div>
         <div class="w-2/3 h-full">
@@ -47,6 +61,7 @@ import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import getPetsOrBlogs from '@/composables/getPetsOrBlogs'
 import usePet from '@/composables/usePet'
+import useUserDetail from '@/composables/useUserDetail'
 import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
 
@@ -58,12 +73,28 @@ export default {
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { data: blogs } = getPetsOrBlogs('petBlog', props.id, 'byId')
         const { pet, error } = getPetDetail('petDetail', props.id)
-        const { updatePetName } = usePet('petDetail')
+        const { updatePetName, toggleFollow } = usePet('petDetail')
+        const { followPet } = useUserDetail('userDetail')
         const isEdit = ref(false)
         const newPetsName = ref(null)
 
         const isOwnership = computed(() => {
             return pet.value && userDetail.value && pet.value.ownerDocID == userDetail.value.docId
+        })
+
+        const isFollowing = computed(() => {
+            let res = false
+            let i
+            
+            if(userDetail.value) {
+                for(i=0; i < userDetail.value.followedPets.length; i++) {
+                    if(userDetail.value.followedPets[i] === props.id) {
+                        res = true
+                        break
+                    }
+                }
+            }
+            return res
         })
 
         const toggleForm = () => {
@@ -77,7 +108,17 @@ export default {
             isEdit.value = false
         }
 
-        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit, blogs }
+        const handleFollow = async () => {
+            await followPet(userDetail.value.docId, props.id, 'follow')
+            await toggleFollow(props.id, 'follow')
+        }
+
+        const handleUnfollow = async () => {
+            await followPet(userDetail.value.docId, props.id, 'unfollow')
+            await toggleFollow(props.id, 'unfollow')
+        }
+
+        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit, blogs, handleFollow, handleUnfollow, isFollowing }
     }
 }
 </script>

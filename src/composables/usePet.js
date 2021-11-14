@@ -76,11 +76,33 @@ const usePet = (collectionName) => {
         }
         catch(err) {
             console.log(err.message)
-            error.value = 'Cound not change likes amount in document'
+            error.value = 'Could not change likes amount in document'
         }
     }
 
-    return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike }
+    const toggleFollow = async (id, action) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            if(action === 'follow') {
+                await updateDoc(docRef, {
+                    followers: increment(1)
+                })
+            }
+            else {
+                await updateDoc(docRef, {
+                    followers: increment(-1)
+                })
+            }
+        }
+        catch {
+            console.log(err.message)
+            error.value = 'Could not change following amount in the document'
+        }
+    }
+
+    return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike, toggleFollow }
 }
 
 export default usePet

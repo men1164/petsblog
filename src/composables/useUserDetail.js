@@ -34,6 +34,28 @@ const useUserDetail = (collectionName) => {
         }
     }
 
+    const followPet = async (id, petId, action) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            if(action === 'follow') {
+                await updateDoc(docRef, {
+                    followedPets: arrayUnion(petId)
+                })
+            }
+            else {
+                await updateDoc(docRef, {
+                    followedPets: arrayRemove(petId)
+                })
+            }
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = "Could not add or remove pet id to followed list"
+        }
+    }
+
     const userVerify = async (id) => {
         error.value = null
         const docRef = doc(projectFirestore, collectionName, id)
@@ -70,7 +92,7 @@ const useUserDetail = (collectionName) => {
         }
     }
 
-    return { error, initDetail, userVerify, addPet, likedBlogsAction }
+    return { error, initDetail, userVerify, addPet, likedBlogsAction, followPet }
 }
 
 export default useUserDetail

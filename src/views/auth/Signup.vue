@@ -52,7 +52,7 @@ export default {
                     userID: res.user.uid,
                     username: res.user.displayName,
                     isVeterinarian: false,
-                    follwedPets: [],
+                    followedPets: [],
                     ownPetsID: [],
                     likedBlogs: []
                 }
