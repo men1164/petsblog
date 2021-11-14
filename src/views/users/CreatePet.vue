@@ -87,6 +87,7 @@ export default {
                 breed: capitalizeBreed,
                 photoURL: '',
                 filePath: '',
+                followers: 0,
                 ownerDocID: userDetail.value.docId,
                 ownerName: user.value.displayName,
                 blogID: []
