@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-20">
+    <div class="ml-20 mt-10">
         <p class="text-white font-semibold text-lg">News from our Veterinarian!</p>
     </div>
     <div class="blogcard-sm flex px-20 py-4 overflow-x-auto">

@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-lg sticky top-0 z-50 mb-10">
+    <div class="navbar py-4 px-2 bg-primary-green bg-opacity-75 shadow-xl sticky top-0 z-50">
         <nav class="flex items-center h-10 min-w-min px-8 mx-auto my-0 text-white">
             <div class="flex items-center">
                 <img class="w-9 h-9 mr-2" src="@/assets/logo.png">

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
+  <form @submit.prevent="handleLogin" class="max-w-400 mx-auto my-10 p-7 rounded-md shadow-lg border-solid bg-white">
     <h3>Log in</h3>
       <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="email" placeholder="Email" v-model="email">
       <input class="border-b border-gray-300 p-2 outline-none block w-full mx-auto my-5" type="password" placeholder="Password" v-model="password">

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="pet" class="flex flex-col h-full w-auto items-center">
+    <div v-if="pet" class="flex flex-col h-full w-auto items-center mt-10">
         <div class="pet-profile bg-white bg-opacity-25 rounded-3xl w-1/3 h-full text-center p-6 shadow-xl mb-10">
             <img class="my-3 mx-auto object-cover w-40 h-40 rounded-full" :src="pet.photoURL">
             <form class="text-black my-3" v-if="isEdit">

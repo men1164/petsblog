@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSignup" class="max-w-400 mx-auto my-0 p-7 rounded-md shadow-lg border-solid bg-white">
+    <form @submit.prevent="handleSignup" class="max-w-400 mx-auto my-10 p-7 rounded-md shadow-lg border-solid bg-white">
         <h3>Sign up</h3>
         <div v-if="!file">
             <img class="w-28 h-28 rounded-full object-cover mx-auto" src="@/assets/default-user-profile.jpeg">
