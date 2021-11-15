@@ -83,18 +83,7 @@ export default {
         })
 
         const isFollowing = computed(() => {
-            let res = false
-            let i
-            
-            if(userDetail.value) {
-                for(i=0; i < userDetail.value.followedPets.length; i++) {
-                    if(userDetail.value.followedPets[i] === props.id) {
-                        res = true
-                        break
-                    }
-                }
-            }
-            return res
+            return userDetail.value && [...userDetail.value.followedPets].includes(props.id)
         })
 
         const toggleForm = () => {
