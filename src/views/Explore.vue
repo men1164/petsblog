@@ -2,7 +2,7 @@
     <div class="ml-20 mt-10">
         <p class="text-white font-semibold text-lg">News from our Veterinarian!</p>
     </div>
-    <div class="blogcard-sm flex px-20 py-4 overflow-x-auto">
+    <div class="blogcard-sm flex px-20 py-4 overflow-x-hidden">
         <BlogCardSM />
         <BlogCardSM />
         <BlogCardSM />
@@ -14,7 +14,7 @@
     <div class="ml-20 mt-10">
         <p class="text-white font-semibold text-lg">Explore our members!</p>
     </div>
-    <div class="petcard flex px-20 pt-4 pb-10 w-full overflow-x-auto">
+    <div class="petcard flex px-20 pt-4 pb-10 w-full overflow-x-hidden">
         <PetCard v-if="pets" :pets="pets" />
     </div>
 </template>
