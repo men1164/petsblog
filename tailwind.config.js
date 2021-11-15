@@ -31,7 +31,8 @@ module.exports = {
         'cardWidth': '311px'
       },
       height: {
-        'cardHeight': '454px'
+        'cardHeight': '454px',
+        '500': '500px'
       }
     },
   },
