@@ -35,9 +35,11 @@
                 <p class="ml-1">{{ blog.likes }}</p>
             </div>
             <!-- ! Comment Component -->
-            <div class="mx-auto w-2/3">
-                <p class="font-bold text-2xl">Comments</p>
-                <div class="border-b-2 border-gray-300"></div>
+            <div class="mx-auto h-96 overflow-y-auto w-2/3">
+                <div class="sticky top-0">
+                    <p class="font-bold text-2xl bg-white">Comments</p>
+                    <div class="border-b-2 border-gray-300"></div>
+                </div>
                 <Comment :blogId="blogId" />
             </div>
         </div>

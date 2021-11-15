@@ -6,7 +6,7 @@ const getComments = (collectionName, blogId) => {
     const error = ref(null)
     const collectionRef = collection(projectFirestore, collectionName)
     const comments = ref(null)
-    const q = query(collectionRef, where('blogId', '==', blogId), orderBy('createAt'))
+    const q = query(collectionRef, where('blogId', '==', blogId), orderBy('createAt', 'desc'))
 
     const unsub = onSnapshot(q, snap => {
         error.value = null
