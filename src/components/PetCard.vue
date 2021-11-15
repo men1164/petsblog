@@ -5,11 +5,17 @@
                 <div class="w-full h-2/3 relative">
                     <img class="h-full w-full object-cover rounded-t-3xl" :src="pet.photoURL">
                 </div>
-                <div class="w-full h-1/3 text-left pl-5 pt-3">
-                    <p class="font-semibold text-lg">{{ pet.petsName }}</p>
-                    <p class="mt-2 text-sm">Owner: {{ pet.ownerName }}</p>
-                    <p class="text-sm">Gender: {{ pet.gender }}</p>
-                    <p class="text-sm">Breed: {{ pet.breed }}</p>
+                <div class="flex items-center px-5 py-3">
+                    <div class="w-full h-auto text-left">
+                        <p class="font-semibold text-lg">{{ pet.petsName }}</p>
+                        <p class="mt-2 text-sm">Owner: {{ pet.ownerName }}</p>
+                        <p class="text-sm">Gender: {{ pet.gender }}</p>
+                        <p class="text-sm">Breed: {{ pet.breed }}</p>
+                    </div>
+                    <div class="bg-primary-green text-white text-center shadow-md max-w-max h-auto p-2 rounded-md">
+                        <p class="font-semibold text-sm">Followers</p>
+                        <p>{{ pet.followers }}</p>
+                    </div>
                 </div>
             </div>
         </router-link>
