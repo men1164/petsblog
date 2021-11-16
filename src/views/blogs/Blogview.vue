@@ -9,14 +9,14 @@
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
-            <div class="mt-16 mx-4 flex items-center"> 
+            <div class="mt-16 flex items-center justify-start mx-32"> 
                 <!-- <img v-if="userDetail" class="profile w-16 h-16 rounded-full shadow-lg object-cover" :src="userDetail.photoURL"> -->
                 <div class="ml-12 flex items-end">
                     <p class="font-semibold text-lg">Written by: {{ pet.ownerName }}</p>
                     <p class="text-sm ml-4 text-gray-400 pb-0.5">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
                 </div>
             </div>
-            <div class="flex flex-col mt-5 mx-16">
+            <div class="flex flex-col mt-5 mx-auto w-3/4">
                 <p class="w-full h-full" v-for="(paragraph, idx) in blog.body.split('\n')" :key="idx">&emsp;&emsp;{{ paragraph }}<br></p>
                 <img class="w-2/3 h-auto mx-auto my-10 shadow-lg rounded-2xl" :src="blog.photoURL">
             </div>
