@@ -4,7 +4,7 @@ import LandingPet from '../views/users/LandingPet.vue'
 import Signup from '../views/auth/Signup.vue'
 import Login from '../views/auth/Login.vue'
 import Explore from '../views/Explore.vue'
-import FollowingPets from '../views/blogs/FollowingPets.vue'
+import FollowingPets from '../views/users/FollowingPets.vue'
 import CreatePet from '../views/users/CreatePet.vue'
 import UserInfo from '../views/users/UserInfo.vue'
 import CreateBlog from '../views/blogs/CreateBlog.vue'
@@ -67,7 +67,7 @@ const routes = [
     component: UserInfo
   },
   {
-    path: '/pet/creat',
+    path: '/pet/create',
     name: 'CreatePet',
     component: CreatePet,
   },

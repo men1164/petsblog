@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-lg h-auto mx-auto my-0 flex flex-col justify-center items-center">
+    <div class="max-w-lg h-auto mx-auto my-10 flex flex-col justify-center items-center">
         <p class="font-bold text-4xl text-white">Create your Pet!</p>
         <div class="w-44 h-44 object-cover rounded-full bg-gray-200 mt-3" v-if="!previewURL" >
             <img class="w-full h-full transform scale-75" src="@/assets/pawprint.png">

@@ -12,7 +12,7 @@
         </div>
         <p class="mt-3 py-3 px-4 bg-gray-100 max-w-max shadow-md rounded-2xl">{{ comment.body }}</p>
     </div>
-    <form class="mt-5 flex items-center sticky bottom-0 bg-white pt-7" @submit.prevent="handleSubmit">
+    <form class="mt-5 flex items-center sticky bottom-0 bg-white pt-7 pb-4" @submit.prevent="handleSubmit">
         <input type="text" class="bg-gray-100 h-10 w-2/3 px-5 rounded-lg shadow focus:bg-gray-200 focus:shadow-lg text-black focus:outline-none" placeholder="What's on your mind..?" v-model="newComment" required>
         <button class="text-primary-green text-lg ml-4 font-medium bg-blue-400 w-10 h-10 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-110 transition-transform" type="submit">
             <svg class="h-6 w-6 mx-auto my-0 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="white">

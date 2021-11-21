@@ -1,5 +1,5 @@
 <template>
-    <div v-for="pet in pets" :key="pet.docId" class="card bg-white rounded-3xl min-w-cardWidth min-h-cardHeight max-w-cardWidth max-h-cardHeight mb-7 mr-7 shadow-xl">
+    <div v-for="pet in pets" :key="pet.docId" class="card bg-white rounded-3xl min-w-cardWidth min-h-cardHeight max-w-cardWidth max-h-cardHeight mb-7 mx-3 shadow-xl">
         <router-link :to="{ name: 'LandingPet', params: { id: pet.docId } }">
             <div class="flex flex-col w-full h-full">
                 <div class="w-full h-2/3 relative">
