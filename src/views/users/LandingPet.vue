@@ -48,8 +48,10 @@
             <div v-if="!blogs" class="mx-auto text-center font-semibold text-white my-10">
                 <p>Let's create the first blog for {{ pet.petsName }}!</p>
             </div>
-            <div v-else class="my-4 mb-16">
-                <BlogCard :blogs="blogs" v-if="blogs" />
+            <div v-else class="my-4 mb-16">        
+                <div v-for="blog in blogs" :key="blog.docId">
+                    <BlogCard :blog="blog" />
+                </div>
             </div>
         </div>
     </div>
