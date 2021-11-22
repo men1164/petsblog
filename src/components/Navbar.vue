@@ -8,7 +8,7 @@
             <div v-if="user" class="ml-11 font-medium">
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white" :to="{ name: 'Explore' }">Explore</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'FollowingPets' }">Following</router-link>
-                <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'FollowingPets' }">Your Blog</router-link>
+                <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'YourBlog' }">Your Blog</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'FollowingPets' }">Your Pet</router-link>
                 
                 <!-- <router-link>Your Pet</router-link>

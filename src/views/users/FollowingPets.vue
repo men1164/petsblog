@@ -6,9 +6,10 @@
         </div>
         <div class="flex flex-wrap justify-center w-2/3 mt-10 h-full">
             <PetCard v-if="followingPets" :pets="followingPets" />
-            <p v-if="followingPets && followingPets.length == 0" class="text-white">
+            <p v-if="followingPets && followingPets.length == 0 && !search" class="text-white">
                 You are not following any pet. <router-link class="font-semibold underline" :to="{ name: 'Explore' }">Explore</router-link> them to find some!
             </p>
+            <p v-else-if="followingPets && followingPets.length == 0 && search" class="text-white">Not found any pet's name match to '{{ search }}'</p>
         </div>
     </div>
 </template>
@@ -16,14 +17,14 @@
 <script>
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import getPetsOrBlogs from '@/composables/getPetsOrBlogs'
+import getPets from '@/composables/getPets'
 import { computed, ref } from '@vue/reactivity'
 import PetCard from '@/components/PetCard.vue'
 
 export default {
     components: { PetCard },
     setup() {
-        const { data: pets } = getPetsOrBlogs('petDetail')
+        const { data: pets } = getPets('petDetail')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const search = ref('')

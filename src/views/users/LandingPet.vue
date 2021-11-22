@@ -61,7 +61,7 @@
 import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import getPetsOrBlogs from '@/composables/getPetsOrBlogs'
+import getBlogs from '@/composables/getBlogs'
 import usePet from '@/composables/usePet'
 import useUserDetail from '@/composables/useUserDetail'
 import BlogCard from '@/components/BlogCard.vue'
@@ -73,7 +73,7 @@ export default {
     setup(props) {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { data: blogs } = getPetsOrBlogs('petBlog', props.id, 'byId')
+        const { data: blogs } = getBlogs('petBlog', ['petDocID', '==', props.id])
         const { pet, error } = getPetDetail('petDetail', props.id)
         const { updatePetName, toggleFollow } = usePet('petDetail')
         const { followPet } = useUserDetail('userDetail')

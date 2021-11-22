@@ -23,12 +23,12 @@
 import PetCard from '@/components/PetCard.vue'
 import BlogCardSM from '@/components/BlogCardSM.vue'
 import { onMounted } from '@vue/runtime-core'
-import getPetsOrBlogs from '@/composables/getPetsOrBlogs'
+import getPets from '@/composables/getPets'
 
 export default {
     components: { BlogCardSM, PetCard },
     setup() {
-        const { data: pets, error } = getPetsOrBlogs('petDetail')
+        const { data: pets, error } = getPets('petDetail')
 
         onMounted((e) => {
             const blogCard = document.querySelector('.blogcard-sm');

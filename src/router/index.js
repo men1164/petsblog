@@ -9,6 +9,7 @@ import CreatePet from '../views/users/CreatePet.vue'
 import UserInfo from '../views/users/UserInfo.vue'
 import CreateBlog from '../views/blogs/CreateBlog.vue'
 import Blogview from '../views/blogs/Blogview.vue'
+import YourBlog from '../views/blogs/YourBlog.vue'
 
 import { projectAuth } from '../firebase/config'
 
@@ -76,6 +77,11 @@ const routes = [
     name: 'Blogview',
     component: Blogview,
     props: true
+  },
+  {
+    path: '/blog/yourblogs',
+    name: 'YourBlog',
+    component: YourBlog
   }
 ]
 
