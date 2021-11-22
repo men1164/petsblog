@@ -27,7 +27,7 @@ import useSignup from '@/composables/useSignup'
 import useStorage from '@/composables/useStorage'
 import useUserDetail from '@/composables/useUserDetail'
 import { ref } from '@vue/reactivity'
-// import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
@@ -36,7 +36,7 @@ export default {
         const displayName = ref('')
         const file = ref(null)
         const fileError = ref(null)
-        // const router = useRouter()
+        const router = useRouter()
         const { url, uploadImage } = useStorage()
         const { initDetail } = useUserDetail('userDetail')
         const types = ['image/png', 'image/jpeg']
@@ -60,13 +60,12 @@ export default {
                     likedBlogs: []
                 }
                 const resDetail = await initDetail(initDoc)
-                if(resDetail) {
-                    console.log(resDetail)
-                }
+                // if(resDetail) {
+                //     console.log(resDetail)
+                // }
                 if(!error.value) {
-                    console.log('SignUp Success')
-                    // * TODO: push router to Explore
-                    // router.push({ name: 'UserPlaylists' })
+                    // console.log('SignUp Success')
+                    router.push({ name: 'Explore' })
                 }
                 // console.log(user.value)
             }
