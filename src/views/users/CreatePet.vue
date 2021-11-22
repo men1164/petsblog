@@ -96,7 +96,7 @@ export default {
             if(file.value) {
                 const res = await create(petDoc)
                 // console.log(res.id)
-                await addPet(userDetail.value.docId, res.id) // ! Maybe don't need it
+                await addPet(userDetail.value.docId, res.id)
                 await uploadImage(file.value, res.id, 'petImg')
                 await updatePhotoURL(res.id, url.value, filePath.value)
                 // route to pet profile landing page

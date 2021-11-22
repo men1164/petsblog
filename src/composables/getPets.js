@@ -2,41 +2,42 @@ import { collection, onSnapshot, orderBy, query, where } from '@firebase/firesto
 import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
-const getPets = (collectionName, queryOrId, mode) => {
+const getPets = (collectionName, qr) => {
     const error = ref(null)
     const data = ref(null)
     const collectionRef = collection(projectFirestore, collectionName)
-    
+    let q
 
-    if(queryOrId && mode === 'byQuery') {
-        // ! Your pets
-        console.log(queryOrId, mode)
+    if(qr) {
+        q = query(collectionRef, where(...qr))
     }
     else {
-        const unsub = onSnapshot(collectionRef, snap => {
-            let results = []
-            snap.docs.forEach(doc => {
-                results.push({ ...doc.data(), docId: doc.id })
-            })
-            if(results.length != 0) {
-                data.value = results
-            }
-            else {
-                data.value = null
-            }
-            error.value = null
-        }, (err) => {
-            console.log(err.message)
-            data.value = null
-            error.value = 'Could not fetch the data!'
-        })
-        
-        watchEffect(onValidate => {
-            onValidate(() => {
-                unsub()
-            })
-        })
+        q = collectionRef
     }
+    
+    const unsub = onSnapshot(q, snap => {
+        let results = []
+        snap.docs.forEach(doc => {
+            results.push({ ...doc.data(), docId: doc.id })
+        })
+        if(results.length != 0) {
+            data.value = results
+        }
+        else {
+            data.value = null
+        }
+        error.value = null
+    }, (err) => {
+        console.log(err.message)
+        data.value = null
+        error.value = 'Could not fetch the data!'
+    })
+        
+    watchEffect(onValidate => {
+        onValidate(() => {
+            unsub()
+        })
+    })
 
     return { data, error }
 }
