@@ -6,6 +6,9 @@
         </div>
         <div class="flex flex-wrap justify-center w-2/3 mt-10 h-full">
             <PetCard v-if="followingPets" :pets="followingPets" />
+            <p v-if="followingPets && followingPets.length == 0" class="text-white">
+                You are not following any pet. <router-link class="font-semibold underline" :to="{ name: 'Explore' }">Explore</router-link> them to find some!
+            </p>
         </div>
     </div>
 </template>
