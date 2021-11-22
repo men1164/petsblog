@@ -20,7 +20,7 @@ const login = async (email, password) => {
     }
     catch(err) {
         console.log(err.message)
-        error.value = err.message
+        error.value = 'Invalid email or password!'
         isPending.value = false
     }
 }
