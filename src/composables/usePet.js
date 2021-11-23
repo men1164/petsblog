@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
-import { addDoc, collection, doc, increment, updateDoc } from '@firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, increment, onSnapshot, query, updateDoc, where, writeBatch } from '@firebase/firestore'
 
 
 const usePet = (collectionName) => {
@@ -102,7 +102,20 @@ const usePet = (collectionName) => {
         }
     }
 
-    return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike, toggleFollow }
+    const deleteDocument = async (id) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            await deleteDoc(docRef)
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = 'Could not delete this document.'
+        }
+    }
+
+    return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike, toggleFollow, deleteDocument }
 }
 
 export default usePet

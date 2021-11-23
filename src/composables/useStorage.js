@@ -1,4 +1,4 @@
-import { uploadBytes, ref, getDownloadURL } from '@firebase/storage'
+import { uploadBytes, ref, getDownloadURL, deleteObject } from '@firebase/storage'
 import { ref as refVue } from '@vue/runtime-dom'
 import { projectStorage } from '../firebase/config'
 
@@ -21,20 +21,19 @@ const useStorage = () => {
         }
     }
 
-    // ! TODO: Update code to version 9
-    // const deleteImage = async(path) => {
-    //     const storageRef = projectStorage.ref(path)
+    const deleteImage = async(path) => {
+        const storageRef = ref(projectStorage, path)
 
-    //     try {
-    //         await storageRef.delete()
-    //     }
-    //     catch(err) {
-    //         console.log(err.message)
-    //         error.value = err.message
-    //     }
-    // }
+        try {
+            await deleteObject(storageRef)
+        }
+        catch(err) {
+            console.log(err.message)
+            error.value = err.message
+        }
+    }
 
-    return { url, filePath, error, uploadImage }
+    return { url, filePath, error, uploadImage, deleteImage }
 }
 
 export default useStorage
