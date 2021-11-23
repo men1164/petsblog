@@ -42,7 +42,7 @@
                                     <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
                                         <div class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                                             <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
-                                                Do you want to delete this?
+                                                Do you want to delete this blog?
                                             </DialogTitle>
                                             <div class="mt-2">
                                                 <p class="text-sm text-gray-500">You cannot undo your action.</p>
@@ -116,7 +116,7 @@ export default {
         TransitionChild,
         Dialog,
         DialogOverlay,
-        DialogTitle, 
+        DialogTitle
     },
     props: ['blogId', 'petId'],
     setup(props) {
