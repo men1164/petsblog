@@ -12,8 +12,11 @@ import Blogview from '../views/blogs/Blogview.vue'
 import YourPet from '../views/users/YourPet.vue'
 import YourBlog from '../views/blogs/YourBlog.vue'
 import Feed from '../views/blogs/Feed.vue'
+import VCreateBlog from '../views/veterinarian/VCreateBlog.vue'
+import VBlogview from '../views/veterinarian/VBlogview.vue'
 
 import { projectAuth } from '../firebase/config'
+import getUserDetail from '../composables/getUserDetail'
 
 const isLoggedIn = (to, from, next) => {
     let user = projectAuth.currentUser
@@ -49,6 +52,22 @@ const routes = [
     beforeEnter: isAuth
   },
   {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/userinfo',
+    name: 'UserInfo',
+    component: UserInfo,
+    beforeEnter: isAuth
+  },
+  {
     path: '/pet/:id',
     name: 'LandingPet',
     component: LandingPet,
@@ -62,29 +81,6 @@ const routes = [
     beforeEnter: isAuth
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/blog/create',
-    name: 'CreateBlog',
-    component: CreateBlog,
-    props: true,
-    beforeEnter: isAuth
-  },
-  {
-    path: '/userinfo',
-    name: 'UserInfo',
-    component: UserInfo,
-    beforeEnter: isAuth
-  },
-  {
     path: '/pet/create',
     name: 'CreatePet',
     component: CreatePet,
@@ -94,6 +90,13 @@ const routes = [
     path: '/pet/yourpets',
     name: 'YourPet',
     component: YourPet,
+    beforeEnter: isAuth
+  },
+  {
+    path: '/blog/create',
+    name: 'CreateBlog',
+    component: CreateBlog,
+    props: true,
     beforeEnter: isAuth
   },
   {
@@ -113,6 +116,18 @@ const routes = [
     path: '/blog/feed',
     name: 'Feed',
     component: Feed,
+    beforeEnter: isAuth
+  },
+  {
+    path: '/blog/veterinarian/create',
+    name: 'VCreateBlog',
+    component: VCreateBlog
+  },
+  {
+    path: '/blog/veterinarian/:blogId',
+    name: 'VBlogview',
+    component: VBlogview,
+    props: true,
     beforeEnter: isAuth
   }
 ]
