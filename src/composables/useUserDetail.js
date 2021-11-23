@@ -9,8 +9,7 @@ const useUserDetail = (collectionName) => {
     const initDetail = async (doc) => {
         error.value = null
         try {
-            const res = await addDoc(collection(projectFirestore, collectionName), doc)
-            return res
+            await addDoc(collection(projectFirestore, collectionName), doc)
         }
         catch(err){
             error.value = err.message

@@ -11,9 +11,6 @@
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'FollowingPets' }">Following</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'YourBlog' }">Your Blog</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'YourPet' }">Your Pet</router-link>
-                
-                <!-- <router-link>Your Pet</router-link>
-                <router-link>Following</router-link> -->
             </div>
             <div class="ml-auto font-normal text-base">
                 <div v-if="user" class="flex flex-row items-center">
@@ -39,9 +36,8 @@ export default {
     const router = useRouter()
 
     const handleLogout = async () => {
-      const res = await logout()
+      await logout()
       if(!error.value) {
-        console.log('Logout completed')
         router.push({ name: 'Home' })
       }
     }

@@ -17,7 +17,6 @@ const signup = async (email, password, displayName) => {
             throw new Error('Could not complete the signup')
         }
         await updateProfile(res.user, { displayName })
-        // console.log(res.user.uid)
         error.value = null
         isPending.value = false
         return res
@@ -30,7 +29,6 @@ const signup = async (email, password, displayName) => {
 }
 
 const updatePhotoURL = async (user, url) => {
-    console.log(url)
     try {
         await updateProfile(user, { photoURL: url })
     }

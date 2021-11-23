@@ -13,7 +13,6 @@ const getUserDetail = (collectionName, uid) => {
         snap.docs.forEach(doc => {
             result.push({ ...doc.data(), docId: doc.id})
         })
-        console.log(result[0])
         userDetail.value = result[0]
     })
 

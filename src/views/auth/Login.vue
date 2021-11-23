@@ -25,7 +25,7 @@ export default {
     const router = useRouter()
 
     const handleLogin = async () => {
-      const res = await login(email.value, password.value)
+      await login(email.value, password.value)
       if(!error.value) {
         router.push({ name: 'Explore' })
       }

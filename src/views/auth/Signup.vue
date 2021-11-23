@@ -59,15 +59,10 @@ export default {
                     ownPetsID: [],
                     likedBlogs: []
                 }
-                const resDetail = await initDetail(initDoc)
-                // if(resDetail) {
-                //     console.log(resDetail)
-                // }
+                await initDetail(initDoc)
                 if(!error.value) {
-                    // console.log('SignUp Success')
                     router.push({ name: 'Explore' })
                 }
-                // console.log(user.value)
             }
             else {
                 fileError.value = 'Please select an image file (png or jpg)'

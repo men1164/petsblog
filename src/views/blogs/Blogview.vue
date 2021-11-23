@@ -1,6 +1,5 @@
 <template>
     <div v-if="blog && pet" class="mx-auto flex flex-col jusify-center items-center relative h-full">
-        <!-- <p class="font-bold text-4xl text-white">You're reading the blog from {{ pet.petsName }} !</p> -->
         <img class="w-full object-cover h-96" :src="pet.photoURL">
         <div class="absolute flex flex-row top-80 bg-white min-w-1/2 max-w-max p-4 rounded-2xl h-24 max-h-32 shadow-lg">
             <div class="flex flex-col w-full h-full">
@@ -12,7 +11,6 @@
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
             <div class="mt-16 flex items-center justify-start mx-32"> 
-                <!-- <img v-if="userDetail" class="profile w-16 h-16 rounded-full shadow-lg object-cover" :src="userDetail.photoURL"> -->
                 <div class="mx-0 flex items-end justify-between w-full">
                     <div class="flex items-end">
                         <p class="font-semibold text-lg">Written by: {{ pet.ownerName }}</p>

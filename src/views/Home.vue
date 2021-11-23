@@ -1,11 +1,5 @@
 <template>
   <div class="landing-content h-full">
-    <!-- <div class="h-full w-full bg-white text-black">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt doloremque asperiores repellendus culpa, consequatur omnis nesciunt quasi quas, et labore impedit, autem totam ratione? Illo aliquam eum delectus rem porro?</p>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus natus est magni. Perferendis eos voluptates expedita fugit excepturi aspernatur iure! Praesentium, quam temporibus ad voluptates laudantium adipisci non natus cum.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa autem minima voluptates similique cum est modi perferendis necessitatibus, magni rerum et quis non nisi perspiciatis vero. Minima laborum reiciendis consequatur?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga odit praesentium, nihil quos doloribus eos fugit qui vitae impedit harum iste nesciunt rerum expedita unde minus explicabo, modi quibusdam saepe.</p>
-    </div> -->
     <div class="flex flex-col justify-center w-2/3 mx-auto h-3/4 my-28">
       <div class="text-white">
         <p class="font-bold text-5xl">Sharing your pet story.</p>

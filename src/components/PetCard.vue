@@ -24,10 +24,7 @@
 
 <script>
 export default {
-    props: ['pets'],
-    setup(props) {
-        
-    }
+    props: ['pets']
 }
 </script>
 

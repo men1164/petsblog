@@ -34,7 +34,7 @@ export default {
     props: ['blogId'],
     setup(props){
         const { user } = getUser()
-        const { error, isPending, addComment } = useComment('comments')
+        const { error, addComment } = useComment('comments')
         const newComment = ref('')
         const { comments } = getComments('comments', props.blogId)
         

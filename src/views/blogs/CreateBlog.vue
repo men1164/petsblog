@@ -2,7 +2,7 @@
     <div v-if="pet" class="mx-auto my-8 flex flex-col jusify-center items-center relative h-full">
         <p class="font-bold text-4xl text-white">Create Blog for {{ pet.petsName }}</p>
         <img class="mt-2 w-full object-cover h-80" :src="pet.photoURL" alt="Banner" width="1920" height="288">
-        <div class="absolute flex flex-row top-80 hover:bg-white bg-white w-1/2 p-4 rounded-2xl h-24 shadow-lg">
+        <div class="absolute flex flex-row top-80 hover:bg-white bg-white w-1/2 p-4 rounded-2xl h-auto shadow-lg">
             <div class="flex flex-col w-full h-full">
                 <input type="text" class="w-full font-bold text-2xl mx-2 focus:outline-none" placeholder="Title..." v-model="title" required>
             </div>
@@ -52,6 +52,7 @@ export default {
         const fileError = ref(null)
         const previewURL = ref(null)
         const router = useRouter()
+        const types = ['image/png', 'image/jpeg']
 
         const submitBlog = async () => {
             const docBlog = {
@@ -82,8 +83,6 @@ export default {
                 fileError.value = 'Please select an image file (png or jpg)'
             }
         }
-
-        const types = ['image/png', 'image/jpeg']
 
         const handleChange = e => {
             const selected = e.target.files[0]

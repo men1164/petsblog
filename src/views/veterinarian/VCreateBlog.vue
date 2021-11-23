@@ -55,6 +55,7 @@ export default {
         const previewURL = ref(null)
         const permissionDenied = ref(null)
         const router = useRouter()
+        const types = ['image/png', 'image/jpeg']
 
         const submitBlog = async () => {
             permissionDenied.value = null
@@ -90,8 +91,6 @@ export default {
             }
 
         }
-
-        const types = ['image/png', 'image/jpeg']
 
         const handleChange = e => {
             const selected = e.target.files[0]

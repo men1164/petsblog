@@ -20,7 +20,6 @@ const getBlogs = (collectionName, qr) => {
         snap.docs.forEach(doc => {
             doc.data().createAt && results.push({ ...doc.data(), docId: doc.id })
         })
-        console.log(results)
         if(results.length != 0) {
             data.value = results
         }

@@ -6,7 +6,7 @@
                     <img class="h-full w-full object-cover rounded-l-3xl" :src="blog.photoURL">
                 </div>
                 <div class="h-full w-2/3 text-left p-3 relative">
-                    <p class="font-medium text-lg">{{ blog.title }}</p>
+                    <p class="font-medium text-lg truncate h-14">{{ blog.title }}</p>
                     <p class="absolute bottom-2 left-3 text-sm">By: Dr. {{ blog.username }}</p>
                 </div>
             </div>
