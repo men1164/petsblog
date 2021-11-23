@@ -91,8 +91,7 @@ export default {
                 filePath: '',
                 followers: 0,
                 ownerDocID: userDetail.value.docId,
-                ownerName: user.value.displayName,
-                blogID: []
+                ownerName: user.value.displayName
             }
 
             if(file.value) {
