@@ -7,6 +7,7 @@
             </div>
             <div v-if="user" class="ml-11 font-medium">
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white" :to="{ name: 'Explore' }">Explore</router-link>
+                <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'Feed' }">Feed</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'FollowingPets' }">Following</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'YourBlog' }">Your Blog</router-link>
                 <router-link class="text-gray-300 transition duration-200 ease-in-out hover:text-white focus:text-white ml-9" :to="{ name: 'YourPet' }">Your Pet</router-link>
@@ -17,7 +18,7 @@
             <div class="ml-auto font-normal text-base">
                 <div v-if="user" class="flex flex-row items-center">
                     <router-link :to="{ name: 'UserInfo' }">
-                        <p class="mr-5">{{ user.displayName }}</p>
+                        <p class="mr-5 font-semibold hover:underline">{{ user.displayName }}</p>
                     </router-link>
                     <button class="rounded-xl text-black bg-gray-200 border-0 cursor-pointer inline-block py-2 px-3 shadow-md mr-2" @click="handleLogout">Log out</button>
                 </div>
