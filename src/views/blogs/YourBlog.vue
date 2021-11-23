@@ -2,7 +2,7 @@
     <div class="flex flex-col h-full w-auto items-center mt-14">
         <p class="font-bold text-white text-4xl">Your Blogs</p>
         <div class="w-2/3 pt-5 text-center mb-10">
-            <input class="h-10 w-1/2 bg-gray-200 focus:bg-gray-100 focus:outline-none rounded-lg p-5 shadow-lg" placeholder="Search pet's name" type="text" v-model="search">
+            <input class="h-10 w-1/2 bg-gray-200 focus:bg-gray-100 focus:outline-none rounded-lg p-5 shadow-lg" placeholder="Search blog by title..." type="text" v-model="search">
         </div>
         <div class="w-2/3" v-for="blog in isOwnBlogs" :key="blog.docId">
             <BlogCard :blog="blog" />

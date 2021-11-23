@@ -4,7 +4,7 @@
         <div class="w-2/3 pt-5 text-center">
             <input class="h-10 w-1/2 bg-gray-200 focus:bg-gray-100 focus:outline-none rounded-lg p-5 shadow-lg" placeholder="Search pet's name" type="text" v-model="search">
         </div>
-        <div class="flex justify-end w-2/3 mt-4 px-5">
+        <div class="flex justify-end w-2/3 mt-4 px-5" v-if="ownPets && !ownPets.length == 0">
             <router-link :to="{ name: 'CreatePet' }">
                 <button class="flex items-center justify-center w-32 h-auto ml-auto mt-2 p-2 bg-gray-100 shadow-md rounded-md text-blue-400 transform hover:scale-110 transition-transform">
                     <svg class="h-5 w-5" fill="currentColor">

@@ -5,7 +5,9 @@
         <div class="absolute flex flex-row top-80 bg-white min-w-1/2 max-w-max p-4 rounded-2xl h-24 max-h-32 shadow-lg">
             <div class="flex flex-col w-full h-full">
                 <p class="w-full font-bold text-2xl mx-2">{{ blog.title }}</p>
-                <p class="mt-10 mx-2 absolute font-medium text-md">Pet: {{ pet.petsName }} | Breed: {{ pet.breed }} | Gender: {{ pet.gender }} | Age: {{ pet.age }} year(s) old</p>
+                <p class="mt-10 mx-2 absolute font-medium text-md text-gray-800">
+                    <router-link class="font-bold hover:underline hover:text-black" :to="{ name: 'LandingPet', params: { id: pet.docId } }">{{ pet.petsName }}</router-link> - Breed: {{ pet.breed }} | Gender: {{ pet.gender }} | Age: {{ pet.age }} year(s) old
+                </p>
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
