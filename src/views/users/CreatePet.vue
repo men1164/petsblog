@@ -55,7 +55,7 @@
 import { ref } from '@vue/reactivity'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePet from '@/composables/usePet'
+import usePetOrBlog from '@/composables/usePetOrBlog'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
 import { useRouter } from 'vue-router'
@@ -68,13 +68,14 @@ export default {
         const breed = ref('')
         const file = ref(null)
         const fileError = ref(null)
-        const { isPending, error, create, updatePhotoURL } = usePet('petDetail')
+        const { isPending, error, create: createPet, updatePhotoURL } = usePetOrBlog('petDetail')
         const { addPet } = useUserDetail('userDetail')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { url, filePath, uploadImage } = useStorage()
         const previewURL = ref(null)
         const router = useRouter()
+        const types = ['image/png', 'image/jpeg']
 
         const handleCreatePet = async () => {
             
@@ -95,12 +96,10 @@ export default {
             }
 
             if(file.value) {
-                const res = await create(petDoc)
-                // console.log(res.id)
+                const res = await createPet(petDoc)
                 await addPet(userDetail.value.docId, res.id)
                 await uploadImage(file.value, res.id, 'petImg')
                 await updatePhotoURL(res.id, url.value, filePath.value)
-                // route to pet profile landing page
                 router.push({ name: 'LandingPet', params: { id: res.id } })
             }
             else {
@@ -111,8 +110,6 @@ export default {
         const handleCancel = () => {
             router.go(-1)
         }
-
-        const types = ['image/png', 'image/jpeg']
 
         const handleChange = e => {
             const selected = e.target.files[0]

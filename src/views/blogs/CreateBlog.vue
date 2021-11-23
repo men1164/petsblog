@@ -35,7 +35,7 @@
 <script>
 import { ref } from '@vue/reactivity'
 import getPetDetail from '@/composables/getPetDetail'
-import usePet from '@/composables/usePet'
+import usePetOrBlog from '@/composables/usePetOrBlog'
 import useStorage from '@/composables/useStorage'
 import { serverTimestamp } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
@@ -46,7 +46,7 @@ export default {
         const body = ref(null)
         const title = ref(null)
         const { pet } = getPetDetail('petDetail', props.id)
-        const { isPending, error, create, updatePhotoURL } = usePet('petBlog')
+        const { isPending, error, create: createBlog, updatePhotoURL } = usePetOrBlog('petBlog')
         const { url, filePath, uploadImage } = useStorage()
         const file = ref(null)
         const fileError = ref(null)
@@ -68,7 +68,7 @@ export default {
             }
 
             if(file.value) {
-                const res = await create(docBlog)
+                const res = await createBlog(docBlog)
                 await uploadImage(file.value, res.id, 'blogImg')
                 await updatePhotoURL(res.id, url.value, filePath.value)
                 router.push({ name: 'Blogview', params: { blogId: res.id, petId: pet.value.docId } })

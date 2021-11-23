@@ -37,7 +37,7 @@
 import { ref } from '@vue/reactivity'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePet from '@/composables/usePet'
+import usePetOrBlog from '@/composables/usePetOrBlog'
 import useStorage from '@/composables/useStorage'
 import { serverTimestamp } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
@@ -48,7 +48,7 @@ export default {
         const title = ref(null)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { isPending, error, create: createBlog, updatePhotoURL } = usePet('veterinarianBlog')
+        const { isPending, error, create: createBlog, updatePhotoURL } = usePetOrBlog('veterinarianBlog')
         const { url, filePath, uploadImage } = useStorage()
         const file = ref(null)
         const fileError = ref(null)

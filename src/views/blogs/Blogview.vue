@@ -101,7 +101,7 @@ import getPetDetail from '@/composables/getPetDetail'
 import getBlogDetail from '@/composables/getBlogDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePet from '@/composables/usePet'
+import usePetOrBlog from '@/composables/usePetOrBlog'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
 import { computed, ref } from '@vue/reactivity'
@@ -124,7 +124,7 @@ export default {
         const { pet } = getPetDetail('petDetail', props.petId)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { error, toggleLike, deleteDocument: deleteBlog } = usePet('petBlog')
+        const { error, toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('petBlog')
         const { deleteImage } = useStorage()
         const { likedBlogsAction } = useUserDetail('userDetail')
         const isOpen = ref(false)
