@@ -5,12 +5,10 @@
         <div class="absolute flex flex-row top-80 hover:bg-white bg-white w-1/2 p-4 rounded-2xl h-24 shadow-lg">
             <div class="flex flex-col w-full h-full">
                 <input type="text" class="w-full font-bold text-2xl mx-2 focus:outline-none" placeholder="Title..." v-model="title" required>
-                <!-- <p class="mt-8 mx-2 absolute font-bold text-xl">#</p> -->
             </div>
         </div>
         <div class="bg-white w-full p-4 px-6 h-full flex flex-col">
             <div class="mt-20 mx-4 flex items-center"> 
-                <!-- <img class="profile w-16 h-16 rounded-full shadow-lg object-cover" src="https://images.unsplash.com/photo-1611558709798-e009c8fd7706?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=782&q=80"> -->
                 <div class="ml-12">
                     <p class="font-medium text-base" v-if="pet">Written By: {{ pet.ownerName }}</p>
                 </div>
@@ -22,13 +20,11 @@
                     <p>Upload photo for this blog: </p>
                     <input class="ml-3" type="file" @change="handleChange" required>
                 </div>
-                <!-- <span class="textarea w-full focus:outline-none" role="textbox" contenteditable>
-                    <input type="text" class="hidden">
-                </span> -->
             </div>
             <div class="flex flex-row justify-center my-5">
                 <button class="cancel py-2.5 p-10 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="handleCancel">Cancel</button>  
-                <button class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="submitBlog">Create</button>
+                <button v-if="!isPending" class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="submitBlog">Create</button>
+                <button v-else class="create mx-8 py-2.5 p-10 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" disabled>Posting..</button>
             </div>
             <p class="text-red-400 text-center">{{ fileError }}</p>
             <p class="text-red-400 text-center">{{ error }}</p>
@@ -75,6 +71,7 @@ export default {
                 const res = await create(docBlog)
                 await uploadImage(file.value, res.id, 'blogImg')
                 await updatePhotoURL(res.id, url.value, filePath.value)
+                router.push({ name: 'Blogview', params: { blogId: res.id, petId: pet.value.docId } })
             }
             else if(!title.value || !body.value) {
                 fileError.value = null
@@ -107,18 +104,12 @@ export default {
             router.go(-1)
         }
 
-        return { body, submitBlog, pet, title, handleChange, fileError, error, previewURL, handleCancel }
+        return { body, submitBlog, pet, title, handleChange, fileError, error, previewURL, handleCancel, isPending }
     }
 }
 </script>
 
 <style scoped>
-/* .profile:hover {
-    box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.2);
-    transform: scale(1.01);
-    transition: all ease 0.2s;
-} */
-
 .cancel:hover {
     box-shadow: 1px 5px 10px rgba(50, 50, 50, 0.3);
     transform: scale(1.03);
@@ -130,10 +121,4 @@ export default {
     transform: scale(1.03);
     transition: all ease 0.2s;
 }
-
-/* Auto height textarea (span) */
-/* .textarea[contenteditable]:empty::before {
-    content: "Write your body...";
-    color: gray;
-} */
 </style>
