@@ -25,6 +25,16 @@ const isLoggedIn = (to, from, next) => {
     }
 }
 
+const isAuth = (to, from, next) => {
+    let user = projectAuth.currentUser
+    if(!user) {
+        next({ name: 'Home' })
+    }
+    else {
+        next()
+    }
+}
+
 const routes = [
   {
     path: '/',
@@ -35,18 +45,21 @@ const routes = [
   {
     path: '/explore',
     name: 'Explore',
-    component: Explore
+    component: Explore,
+    beforeEnter: isAuth
   },
   {
     path: '/pet/:id',
     name: 'LandingPet',
     component: LandingPet,
-    props: true
+    props: true,
+    beforeEnter: isAuth
   },
   {
     path: '/pet/following',
     name: 'FollowingPets',
-    component: FollowingPets
+    component: FollowingPets,
+    beforeEnter: isAuth
   },
   {
     path: '/signup',
@@ -62,38 +75,45 @@ const routes = [
     path: '/blog/create',
     name: 'CreateBlog',
     component: CreateBlog,
-    props: true
+    props: true,
+    beforeEnter: isAuth
   },
   {
     path: '/userinfo',
     name: 'UserInfo',
-    component: UserInfo
+    component: UserInfo,
+    beforeEnter: isAuth
   },
   {
     path: '/pet/create',
     name: 'CreatePet',
     component: CreatePet,
+    beforeEnter: isAuth
   },
   {
     path: '/pet/yourpets',
     name: 'YourPet',
-    component: YourPet
+    component: YourPet,
+    beforeEnter: isAuth
   },
   {
     path: '/blog/:blogId',
     name: 'Blogview',
     component: Blogview,
-    props: true
+    props: true,
+    beforeEnter: isAuth
   },
   {
     path: '/blog/yourblogs',
     name: 'YourBlog',
-    component: YourBlog
+    component: YourBlog,
+    beforeEnter: isAuth
   },
   {
     path: '/blog/feed',
     name: 'Feed',
-    component: Feed
+    component: Feed,
+    beforeEnter: isAuth
   }
 ]
 
