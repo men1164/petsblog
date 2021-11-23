@@ -6,7 +6,8 @@ module.exports = {
       maxWidth: {
         '400': '400px',
         '1/2': '150%',
-        'cardWidth': '275px'
+        'cardWidth': '275px',
+        'cardWidth-sm': '300px'
       },
       minWidth: {
         'cardWidth': '275px',
@@ -15,10 +16,12 @@ module.exports = {
       },
       minHeight: {
         'cardHeight': '400px',
-        'cardHeight-sm': '100px'
+        'cardHeight-sm': '100px',
+        '26': '96px'
       },
       maxHeight: {
         'cardHeight': '400px',
+        'cardHeight-sm': '100px'
       },
       backgroundColor: {
         'primary-green': '#6BA8A0'
@@ -28,10 +31,12 @@ module.exports = {
         'verified-green': '#13CC00'
       },
       width: {
+        'cardWidth-sm': '300px',
         'cardWidth': '311px'
       },
       height: {
         'cardHeight': '454px',
+        'cardHeight-sm': '100px',
         '500': '500px'
       }
     },

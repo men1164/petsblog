@@ -1,8 +1,8 @@
 <template>
     <div v-if="blog" class="mx-auto flex flex-col jusify-center items-center relative h-full">
         <img class="w-full object-cover h-96" src="@/assets/cover-vblog.jpg">
-        <div class="absolute flex flex-row top-80 bg-white min-w-1/2 max-w-max p-4 rounded-2xl h-24 max-h-32 shadow-lg">
-            <div class="flex flex-col w-full h-full">
+        <div class="absolute flex flex-row top-80 bg-white min-w-min max-w-3xl p-4 rounded-2xl h-auto min-h-26 max-h-32 shadow-lg">
+            <div class="flex flex-col w-full justify-center">
                 <p class="w-full font-bold text-2xl mx-2">{{ blog.title }}</p>
             </div>
         </div>
@@ -10,7 +10,12 @@
             <div class="mt-16 flex items-center justify-start mx-32"> 
                 <div class="mx-0 flex items-end justify-between w-full">
                     <div class="flex items-end">
-                        <p class="font-semibold text-lg">Written by: Dr. {{ blog.username }}</p>
+                        <p class="font-semibold text-lg flex items-end">
+                            Written by: Dr. {{ blog.username }}
+                            <svg class="h-4 w-4 mb-1.5 ml-1 text-verified-green" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </p>
                         <p v-if="blog && blog.createAt" class="text-sm ml-4 text-gray-400 pb-0.5">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
                     </div>
                     <div v-if="isOwner">
