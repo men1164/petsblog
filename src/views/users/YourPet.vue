@@ -17,7 +17,7 @@
         <div class="flex flex-wrap justify-center w-2/3 mt-4 h-full">
             <PetCard v-if="ownPets && !search" :pets="ownPets" />
             <PetCard v-else-if="ownPets && search" :pets="ownPets" />
-            <p v-if="ownPets && ownPets.length == 0 && !search" class="text-white">
+            <p v-if="ownPets && ownPets.length == 0 && !search" class="text-white mt-6">
                 You don't have any pet. <router-link class="font-semibold underline" :to="{ name: 'CreatePet' }">Create one!</router-link>
             </p>
             <p v-else-if="ownPets && ownPets.length == 0 && search" class="text-white">Not found any pet's name match to '{{ search }}'</p>

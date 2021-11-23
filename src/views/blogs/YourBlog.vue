@@ -7,6 +7,12 @@
         <div class="w-2/3" v-for="blog in isOwnBlogs" :key="blog.docId">
             <BlogCard :blog="blog" />
         </div>
+        <div v-if="isOwnBlogs && isOwnBlogs.length == 0 && !search">
+            <p class="text-white">You don't have any blog. Go to <router-link class="font-semibold underline" :to="{ name: 'YourPet' }">your pet</router-link> to post some blog!</p>
+        </div>
+        <div v-else-if="isOwnBlogs && isOwnBlogs.length == 0 && search">
+            <p class="text-white">Not found any blog's title match to '{{ search }}'</p>
+        </div>
     </div>
 </template>
 
