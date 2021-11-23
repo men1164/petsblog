@@ -23,12 +23,26 @@ const useUserDetail = (collectionName) => {
         const docRef = doc(projectFirestore, collectionName, id)
 
         try {
-            const res = await updateDoc(docRef, {
+            await updateDoc(docRef, {
                 ownPetsID: arrayUnion(petId)
             })
-            // return res
         }
         catch(err) {
+            error.value = err.message
+            console.log(error.value)
+        }
+    }
+
+    const removePet = async (id, petId) => {
+        error.value = null
+        const docRef = doc(projectFirestore, collectionName, id)
+
+        try {
+            await updateDoc(docRef, {
+                ownPetsID: arrayRemove(petId)
+            })
+        }
+        catch (err) {
             error.value = err.message
             console.log(error.value)
         }
@@ -92,7 +106,7 @@ const useUserDetail = (collectionName) => {
         }
     }
 
-    return { error, initDetail, userVerify, addPet, likedBlogsAction, followPet }
+    return { error, initDetail, userVerify, addPet, likedBlogsAction, followPet, removePet }
 }
 
 export default useUserDetail

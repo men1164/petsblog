@@ -40,10 +40,11 @@
             </div>
             <div class="flex justify-center">
                 <div class="flex justify-end w-1/2 mr-3">
-                    <button class="py-2.5 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="handleCancel">Cancel</button>  
+                    <button v-if="!isPending" class="py-2.5 text-red-600 text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" @click="handleCancel">Cancel</button>  
                 </div>
                 <div class="flex justify-start w-1/2 ml-3">
-                    <button class="py-2.5 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" type="submit">Create</button>
+                    <button v-if="!isPending" class="py-2.5 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" type="submit">Create</button>
+                    <button v-else class="py-2.5 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" type="submit" disabled>Creating...</button>
                 </div>
             </div>
         </form>

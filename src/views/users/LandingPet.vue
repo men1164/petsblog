@@ -64,6 +64,7 @@ import getUserDetail from '@/composables/getUserDetail'
 import getBlogs from '@/composables/getBlogs'
 import usePet from '@/composables/usePet'
 import useUserDetail from '@/composables/useUserDetail'
+import useStorage from '@/composables/useStorage'
 import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
@@ -78,7 +79,8 @@ export default {
         const { pet, error } = getPetDetail('petDetail', props.id)
         const { updatePetName, toggleFollow, deleteDocument: deletePet } = usePet('petDetail')
         const { deleteDocument: deleteBlog } = usePet('petBlog')
-        const { followPet } = useUserDetail('userDetail')
+        const { followPet, removePet } = useUserDetail('userDetail')
+        const { deleteImage } = useStorage()
         const isEdit = ref(false)
         const newPetsName = ref(null)
         const router = useRouter()
@@ -117,11 +119,13 @@ export default {
                 let blog
                 const allBlogs = [...blogs.value]
                 for (blog of allBlogs) {
+                    await deleteImage(blog.filePath)
                     await deleteBlog(blog.docId)
                 }
             }
+            await deleteImage(pet.value.filePath)
+            await removePet(userDetail.value.docId, props.id)
             await deletePet(props.id)
-            console.log("deleted!")
             router.push({ name: 'YourPet' })
         }
 
