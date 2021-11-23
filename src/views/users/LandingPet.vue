@@ -4,6 +4,7 @@
             <img class="my-3 mx-auto object-cover w-40 h-40 rounded-full" :src="pet.photoURL">
             <form class="text-black my-3" v-if="isEdit">
                 <input type="text" class="focus:outline-none" v-model="newPetsName">
+                <p class="text-white text-sm mt-2" v-if="editError">{{ editError }}</p>
             </form>
             <p class="font-semibold text-xl mb-2" v-else>{{ pet.petsName }}</p>
             <p class="text-base">Owner: {{ pet.ownerName }}</p>
@@ -138,6 +139,7 @@ export default {
         const { deleteImage } = useStorage()
         const isEdit = ref(false)
         const newPetsName = ref(null)
+        const editError = ref(null)
         const router = useRouter()
         const isOpen = ref(false)
 
@@ -151,13 +153,21 @@ export default {
 
         const toggleForm = () => {
             newPetsName.value = null
+            editError.value = null
             isEdit.value = !isEdit.value
         }
 
         const submitEdit = async () => {
-            const inputName = newPetsName.value[0].toUpperCase() + newPetsName.value.slice(1)
-            await updatePetName(pet.value.docId, inputName)
-            isEdit.value = false
+            let inputName
+            editError.value = null
+            if(newPetsName.value) {
+                inputName = newPetsName.value[0].toUpperCase() + newPetsName.value.slice(1)
+                await updatePetName(pet.value.docId, inputName)
+                isEdit.value = false
+            }
+            else {
+                editError.value = 'Please enter the new name!'
+            }
         }
 
         const handleFollow = async () => {
@@ -193,7 +203,7 @@ export default {
             isOpen.value = true
         }
 
-        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, submitEdit, blogs, handleFollow, handleUnfollow, isFollowing, handleDelete, isOpen, closeModal, openModal }
+        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, editError, submitEdit, blogs, handleFollow, handleUnfollow, isFollowing, handleDelete, isOpen, closeModal, openModal }
     }
 }
 </script>
