@@ -6,7 +6,7 @@ This project targeting people who loves to pet. You can create a pet account to 
 
 We also have a Veterinary mode, user can verify and activate veterinary mode by uploaded graduated certificate from Faculty of Veterinary Medicine at any university (Mockup System). Veterinarian can post a blog that provide knowledge, tips or tricks how to pet your animal perfectly. Any users can access these blogs right from Explore page.
 
-> Please note that this website currently unsupported responsive design. Try the demo only on desktop
+> Please note that this website currently unsupported responsive design. Try the demo on desktop only.
 
 ### [Demo](https://cpe-petsblog.web.app/)
 
