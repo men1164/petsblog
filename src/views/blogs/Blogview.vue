@@ -1,10 +1,10 @@
 <template>
     <div v-if="blog && pet" class="mx-auto flex flex-col jusify-center items-center relative h-full">
         <img class="w-full object-cover h-96" :src="pet.photoURL">
-        <div class="absolute flex flex-row top-80 bg-white min-w-1/2 max-w-max p-4 rounded-2xl h-24 max-h-32 shadow-lg">
+        <div class="absolute flex flex-row top-80 bg-white min-w-1/2 max-w-4xl p-4 rounded-2xl h-auto shadow-lg">
             <div class="flex flex-col w-full h-full">
                 <p class="w-full font-bold text-2xl mx-2">{{ blog.title }}</p>
-                <p class="mt-10 mx-2 absolute font-medium text-md text-gray-800">
+                <p class="mt-2 mx-2 font-medium text-md text-gray-800">
                     <router-link class="font-bold hover:underline hover:text-black" :to="{ name: 'LandingPet', params: { id: pet.docId } }">{{ pet.petsName }}</router-link> - Breed: {{ pet.breed }} | Gender: {{ pet.gender }} | Age: {{ pet.age }} year(s) old
                 </p>
             </div>

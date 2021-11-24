@@ -6,8 +6,9 @@
                     <img class="h-full w-full object-cover rounded-l-3xl" :src="blog.photoURL">
                 </div>
                 <div class="h-full w-2/3 text-left p-3 relative">
-                    <p class="font-medium text-lg truncate h-14">{{ blog.title }}</p>
-                    <p class="absolute bottom-2 left-3 text-sm">By: Dr. {{ blog.username }}</p>
+                    <p class="font-medium text-lg truncate mb-2">{{ blog.title }}</p>
+                    <p class="text-sm mb-1">By: Dr. {{ blog.username }}</p>
+                    <p class="text-sm text-gray-500">{{ formatDistanceToNow(blog.createAt.toDate(), { addSuffix: true }) }}</p>
                 </div>
             </div>
         </router-link>
@@ -15,8 +16,13 @@
 </template>
 
 <script>
+import { formatDistanceToNow } from 'date-fns'
+
 export default {
-    props: ['blogs']
+    props: ['blogs'],
+    setup() {
+        return { formatDistanceToNow }
+    }
 }
 </script>
 
