@@ -183,7 +183,7 @@ export default {
         const handleDelete = async () => {
             if(blogs.value) {
                 let blog
-                const allBlogs = [...blogs.value]
+                const allBlogs = [...blogs.value] // Spread data to the normal array from proxy
                 for (blog of allBlogs) {
                     await deleteImage(blog.filePath)
                     await deleteBlog(blog.docId)

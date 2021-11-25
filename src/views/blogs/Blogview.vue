@@ -25,6 +25,7 @@
                             <p class="ml-1">Delete</p>
                             </button>
                         </div>
+                        <!-- ****** Delete warning modal ****** -->
                         <TransitionRoot appear :show="isOpen" as="template">
                             <Dialog as="div" @close="closeModal">
                                 <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -60,6 +61,7 @@
                                 </div>
                             </Dialog>
                         </TransitionRoot>
+                        <!-- ************** -->
                     </div>
                 </div>
             </div>
@@ -128,24 +130,29 @@ export default {
         const isOpen = ref(false)
         const router = useRouter()
         
+        // Computed if user give a like on this blog or not
         const isLiked = computed(() => {
             return userDetail.value && [...userDetail.value.likedBlogs].includes(props.blogId)
         })
 
+        // Computed if user own this blog, then the delete button will appear.
         const isOwner = computed(() => {
             return userDetail.value && [...userDetail.value.ownPetsID].includes(blog.value.petDocID)
         })
 
+        // Perform like request to the backed
         const handleLike = async () => {
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'like')
             await toggleLike(props.blogId, 'like')
         }
 
+        // Perform unlike request to the backend
         const handleUnlike = async () => {
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'unlike')
             await toggleLike(props.blogId, 'unlike')
         }
 
+        // Perform delete request
         const handleDelete = async () => {
             await deleteImage(blog.value.filePath)
             await deleteBlog(blog.value.docId)
@@ -153,6 +160,7 @@ export default {
             router.push({ name: "LandingPet", params: { id: pet.value.docId } })
         }
 
+        // Set the modal state to display or not
         const closeModal = () => {
             isOpen.value = false
         }

@@ -16,7 +16,6 @@ import VCreateBlog from '../views/veterinarian/VCreateBlog.vue'
 import VBlogview from '../views/veterinarian/VBlogview.vue'
 
 import { projectAuth } from '../firebase/config'
-import getUserDetail from '../composables/getUserDetail'
 
 const isLoggedIn = (to, from, next) => {
     let user = projectAuth.currentUser
