@@ -19,16 +19,16 @@
 <script>
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import getBlogs from '@/composables/getBlogs'
 import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
+import getCollection from '../../composables/getCollection'
 
 export default {
     components: { BlogCard },
     setup() {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { data: blogs } = getBlogs('petBlog')
+        const { data: blogs } = getCollection('petBlog', 'blogs')
         const search = ref('')
 
         const isOwnBlogs = computed(() => {

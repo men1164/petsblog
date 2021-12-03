@@ -17,14 +17,14 @@
 <script>
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import getPets from '@/composables/getPets'
 import { computed, ref } from '@vue/reactivity'
 import PetCard from '@/components/PetCard.vue'
+import getCollection from '../../composables/getCollection'
 
 export default {
     components: { PetCard },
     setup() {
-        const { data: pets } = getPets('petDetail')
+        const { data: pets } = getCollection('petDetail', 'pets')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const search = ref('')

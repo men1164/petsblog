@@ -94,7 +94,8 @@
             </div>
             <div class="border-b-2 mt-2"></div>
             <div v-if="!blogs" class="mx-auto text-center font-semibold text-white my-10">
-                <p>Let's create the first blog for {{ pet.petsName }}!</p>
+                <p v-if="isOwnership" >Let's create the first blog for {{ pet.petsName }}!</p>
+                <p v-else>No blog created from {{ pet.petsName }}</p>
             </div>
             <div v-else class="my-4 mb-16">        
                 <div v-for="blog in blogs" :key="blog.docId">
@@ -109,7 +110,6 @@
 import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import getBlogs from '@/composables/getBlogs'
 import usePetOrBlog from '@/composables/usePetOrBlog'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
@@ -117,6 +117,7 @@ import BlogCard from '@/components/BlogCard.vue'
 import { computed, ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay, DialogTitle } from '@headlessui/vue'
+import getCollection from '../../composables/getCollection'
 
 export default {
     props: ['id'],
@@ -131,7 +132,7 @@ export default {
     setup(props) {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { data: blogs } = getBlogs('petBlog', ['petDocID', '==', props.id])
+        const { data: blogs } = getCollection('petBlog', 'blogs', ['petDocID', '==', props.id])
         const { pet, error } = getPetDetail('petDetail', props.id)
         const { updatePetName, toggleFollow, deleteDocument: deletePet } = usePetOrBlog('petDetail')
         const { deleteDocument: deleteBlog } = usePetOrBlog('petBlog')

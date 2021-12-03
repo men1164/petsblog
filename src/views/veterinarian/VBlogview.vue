@@ -122,7 +122,7 @@ export default {
         const { blog } = getBlogDetail('veterinarianBlog', props.blogId)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { error, toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('veterinarianBlog')
+        const { toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('veterinarianBlog')
         const { deleteImage } = useStorage()
         const { likedBlogsAction } = useUserDetail('userDetail')
         const isOpen = ref(false)

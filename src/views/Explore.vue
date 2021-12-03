@@ -17,14 +17,13 @@
 import PetCard from '@/components/PetCard.vue'
 import BlogCardSM from '@/components/BlogCardSM.vue'
 import { onMounted } from '@vue/runtime-core'
-import getPets from '@/composables/getPets'
-import getBlogs from '@/composables/getBlogs'
+import getCollection from '../composables/getCollection'
 
 export default {
     components: { BlogCardSM, PetCard },
     setup() {
-        const { data: pets, error } = getPets('petDetail')
-        const { data: blogs } = getBlogs('veterinarianBlog')
+        const { data: pets } = getCollection('petDetail', 'pets')
+        const { data: blogs } = getCollection('veterinarianBlog', 'blogs')
 
         onMounted((e) => {
             const blogCard = document.querySelector('.blogcard-sm');
@@ -41,7 +40,7 @@ export default {
             });
         })
 
-        return { pets, blogs, error }
+        return { pets, blogs }
     }
 }
 </script>
