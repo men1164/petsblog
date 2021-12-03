@@ -26,7 +26,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import getUser from '@/composables/getUser'
 import getCollection from '../composables/getCollection'
-import useComment from '@/composables/useComment'
+import useData from '@/composables/useData'
 import { ref } from '@vue/reactivity'
 import { serverTimestamp } from '@firebase/firestore'
 
@@ -34,7 +34,7 @@ export default {
     props: ['blogId'],
     setup(props){
         const { user } = getUser()
-        const { error, addComment } = useComment('comments')
+        const { error, create: addComment } = useData('comments')
         const newComment = ref('')
         const { data: comments } = getCollection('comments', 'comments', ['blogId', '==', props.blogId])
         

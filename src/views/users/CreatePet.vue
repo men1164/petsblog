@@ -55,7 +55,7 @@
 import { ref } from '@vue/reactivity'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePetOrBlog from '@/composables/usePetOrBlog'
+import useData from '@/composables/useData'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
 import { useRouter } from 'vue-router'
@@ -68,10 +68,10 @@ export default {
         const breed = ref('')
         const file = ref(null)
         const fileError = ref(null)
-        const { isPending, error, create: createPet, updatePhotoURL } = usePetOrBlog('petDetail')
-        const { addPet } = useUserDetail('userDetail')
+        const { isPending, error, create: createPet, updatePhotoURL } = useData('petDetail')
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
+        const { addPet } = useUserDetail('userDetail')
         const { url, filePath, uploadImage } = useStorage()
         const previewURL = ref(null)
         const router = useRouter()

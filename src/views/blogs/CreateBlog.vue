@@ -34,7 +34,7 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import usePetOrBlog from '@/composables/usePetOrBlog'
+import useData from '@/composables/useData'
 import useStorage from '@/composables/useStorage'
 import { serverTimestamp } from 'firebase/firestore'
 import { useRouter } from 'vue-router'
@@ -46,7 +46,7 @@ export default {
         const body = ref(null)
         const title = ref(null)
         const { document: pet } = getDocument('petDetail', props.id)
-        const { isPending, error, create: createBlog, updatePhotoURL } = usePetOrBlog('petBlog')
+        const { isPending, error, create: createBlog, updatePhotoURL } = useData('petBlog')
         const { url, filePath, uploadImage } = useStorage()
         const file = ref(null)
         const fileError = ref(null)

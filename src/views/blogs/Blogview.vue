@@ -100,7 +100,7 @@ import Comment from '@/components/Comment.vue'
 import getDocument from '../../composables/getDocument'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePetOrBlog from '@/composables/usePetOrBlog'
+import useData from '@/composables/useData'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
 import { computed, ref } from '@vue/reactivity'
@@ -123,7 +123,7 @@ export default {
         const { document: pet } = getDocument('petDetail', props.petId)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
-        const { error, toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('petBlog')
+        const { toggleLike, deleteDocument: deleteBlog } = useData('petBlog')
         const { deleteImage } = useStorage()
         const { likedBlogsAction } = useUserDetail('userDetail')
         const isOpen = ref(false)

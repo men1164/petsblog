@@ -1,7 +1,6 @@
 import { ref } from "vue"
 import { projectAuth } from '../firebase/config'
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth"
-import useUserDetail from "./useUserDetail"
 
 const error = ref(null)
 const isPending = ref(false)

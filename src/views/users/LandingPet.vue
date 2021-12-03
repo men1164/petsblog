@@ -109,7 +109,7 @@
 <script>
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
-import usePetOrBlog from '@/composables/usePetOrBlog'
+import useData from '@/composables/useData'
 import useUserDetail from '@/composables/useUserDetail'
 import useStorage from '@/composables/useStorage'
 import BlogCard from '@/components/BlogCard.vue'
@@ -134,8 +134,8 @@ export default {
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { data: blogs } = getCollection('petBlog', 'blogs', ['petDocID', '==', props.id])
         const { document: pet } = getDocument('petDetail', props.id)
-        const { updatePetName, toggleFollow, deleteDocument: deletePet } = usePetOrBlog('petDetail')
-        const { deleteDocument: deleteBlog } = usePetOrBlog('petBlog')
+        const { updatePetName, toggleFollow, deleteDocument: deletePet } = useData('petDetail')
+        const { deleteDocument: deleteBlog } = useData('petBlog')
         const { followPet, removePet } = useUserDetail('userDetail')
         const { deleteImage } = useStorage()
         const isEdit = ref(false)

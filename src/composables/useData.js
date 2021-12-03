@@ -3,7 +3,7 @@ import { projectFirestore } from '../firebase/config'
 import { addDoc, collection, deleteDoc, doc, increment, onSnapshot, query, updateDoc, where, writeBatch } from '@firebase/firestore'
 
 
-const usePetOrBlog = (collectionName) => {
+const useData = (collectionName) => {
     const isPending = ref(false)
     const error = ref(null)
     
@@ -118,4 +118,4 @@ const usePetOrBlog = (collectionName) => {
     return { isPending, error, create, updatePhotoURL, updatePetName, toggleLike, toggleFollow, deleteDocument }
 }
 
-export default usePetOrBlog
+export default useData
