@@ -19,7 +19,7 @@ const getCollection = (collectionName, get, qr) => {
     /****
      * Conditions 
      * - to get blogs or comments are need to order by a time that created 
-     * - to query pets, needs only where, no order
+     * - to get pets, needs only where method, no order by
      * - otherwise, get data without query but order by time created, use for get all blogs mostly.
      * ****/
     if(qr && (get === 'blogs' || get === 'comments')) {
@@ -41,7 +41,7 @@ const getCollection = (collectionName, get, qr) => {
     const unsub = onSnapshot(q, snap => {
         let results = []
 
-        /**** To get blogs or comments, needs to wait until the server create timestamps in the data  ****/
+        /**** To get blogs or comments, it needs to wait until the server create timestamps in the data  ****/
         if(get === 'blogs' || get === 'comments') {
             snap.docs.forEach(doc => {
                 doc.data().createAt && results.push({ ...doc.data(), docId: doc.id })

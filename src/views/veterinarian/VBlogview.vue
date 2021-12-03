@@ -97,7 +97,6 @@
 
 <script>
 import Comment from '@/components/Comment.vue'
-import getBlogDetail from '@/composables/getBlogDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import usePetOrBlog from '@/composables/usePetOrBlog'
@@ -107,6 +106,7 @@ import { computed, ref } from '@vue/reactivity'
 import { formatDistanceToNow } from 'date-fns'
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay, DialogTitle } from '@headlessui/vue'
 import { useRouter } from 'vue-router'
+import getDocument from '../../composables/getDocument'
 
 export default {
     components: { 
@@ -119,7 +119,7 @@ export default {
     },
     props: ['blogId'],
     setup(props) {
-        const { blog } = getBlogDetail('veterinarianBlog', props.blogId)
+        const { document: blog } = getDocument('veterinarianBlog', props.blogId)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('veterinarianBlog')

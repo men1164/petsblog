@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import getPetDetail from '@/composables/getPetDetail'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import usePetOrBlog from '@/composables/usePetOrBlog'
@@ -118,6 +117,7 @@ import { computed, ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay, DialogTitle } from '@headlessui/vue'
 import getCollection from '../../composables/getCollection'
+import getDocument from '../../composables/getDocument'
 
 export default {
     props: ['id'],
@@ -133,7 +133,7 @@ export default {
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { data: blogs } = getCollection('petBlog', 'blogs', ['petDocID', '==', props.id])
-        const { pet, error } = getPetDetail('petDetail', props.id)
+        const { document: pet } = getDocument('petDetail', props.id)
         const { updatePetName, toggleFollow, deleteDocument: deletePet } = usePetOrBlog('petDetail')
         const { deleteDocument: deleteBlog } = usePetOrBlog('petBlog')
         const { followPet, removePet } = useUserDetail('userDetail')
@@ -204,7 +204,7 @@ export default {
             isOpen.value = true
         }
 
-        return { pet, error, isOwnership, isEdit, toggleForm, newPetsName, editError, submitEdit, blogs, handleFollow, handleUnfollow, isFollowing, handleDelete, isOpen, closeModal, openModal }
+        return { pet, isOwnership, isEdit, toggleForm, newPetsName, editError, submitEdit, blogs, handleFollow, handleUnfollow, isFollowing, handleDelete, isOpen, closeModal, openModal }
     }
 }
 </script>

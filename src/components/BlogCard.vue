@@ -16,12 +16,12 @@
 
 <script>
 import { formatDistanceToNow } from 'date-fns'
-import getPetDetail from '@/composables/getPetDetail'
+import getDocument from '../composables/getDocument'
 
 export default {
     props: ['blog'],
     setup(props) {
-        const { pet } = getPetDetail('petDetail', props.blog.petDocID)
+        const { document: pet } = getDocument('petDetail', props.blog.petDocID)
 
         return { formatDistanceToNow, pet }
     }

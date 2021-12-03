@@ -15,7 +15,7 @@
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import BlogCard from '@/components/BlogCard.vue'
-import { computed, ref } from '@vue/reactivity'
+import { computed } from '@vue/reactivity'
 import getCollection from '../../composables/getCollection'
 
 export default {

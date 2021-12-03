@@ -97,8 +97,7 @@
 
 <script>
 import Comment from '@/components/Comment.vue'
-import getPetDetail from '@/composables/getPetDetail'
-import getBlogDetail from '@/composables/getBlogDetail'
+import getDocument from '../../composables/getDocument'
 import getUser from '@/composables/getUser'
 import getUserDetail from '@/composables/getUserDetail'
 import usePetOrBlog from '@/composables/usePetOrBlog'
@@ -120,8 +119,8 @@ export default {
     },
     props: ['blogId', 'petId'],
     setup(props) {
-        const { blog } = getBlogDetail('petBlog', props.blogId)
-        const { pet } = getPetDetail('petDetail', props.petId)
+        const { document: blog } = getDocument('petBlog', props.blogId)
+        const { document: pet } = getDocument('petDetail', props.petId)
         const { user } = getUser()
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { error, toggleLike, deleteDocument: deleteBlog } = usePetOrBlog('petBlog')
