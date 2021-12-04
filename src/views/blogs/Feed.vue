@@ -25,6 +25,10 @@ export default {
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { data: blogs } = getCollection('petBlog', 'blogs')
 
+        /**
+         * Use to computed all blogs and filter only the blog that
+         * users following that pet.
+         */
         const followingBlogs = computed(() => {
             let res
             if(blogs.value && userDetail.value) {

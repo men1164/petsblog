@@ -1,4 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+/**
+ * Import all .vue files in view folder, to specify path for each page.
+ */
 import Home from '../views/Home.vue'
 import LandingPet from '../views/users/LandingPet.vue'
 import Signup from '../views/auth/Signup.vue'
@@ -17,6 +21,10 @@ import VBlogview from '../views/veterinarian/VBlogview.vue'
 
 import { projectAuth } from '../firebase/config'
 
+/**
+ * Check if user already logged in and try to access home page,
+ * redirect to explore page.
+ */
 const isLoggedIn = (to, from, next) => {
     let user = projectAuth.currentUser
     if(user) {
@@ -27,6 +35,10 @@ const isLoggedIn = (to, from, next) => {
     }
 }
 
+/**
+ * Check if user is logged in or not,
+ * if not redirect to Home page to force logging in. 
+ */
 const isAuth = (to, from, next) => {
     let user = projectAuth.currentUser
     if(!user) {

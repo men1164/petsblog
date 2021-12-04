@@ -73,12 +73,17 @@ export default {
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const { addPet } = useUserDetail('userDetail')
         const { url, filePath, uploadImage } = useStorage()
-        const previewURL = ref(null)
+        const previewURL = ref(null)    /* using for preview image before upload */
         const router = useRouter()
-        const types = ['image/png', 'image/jpeg']
+        const types = ['image/png', 'image/jpeg']   /* acceptable file type */
 
+        /**
+         * Handle when user submit form to create pet,
+         * send a request to backend.
+         */
         const handleCreatePet = async () => {
             
+            /* Validate name and breed, capitalize the first character */
             const capitalizeName = petsName.value[0].toUpperCase() + petsName.value.slice(1)
             const capitalizeBreed = breed.value[0].toUpperCase() + breed.value.slice(1)
 
@@ -106,10 +111,15 @@ export default {
             }
         }
 
+        /* Handle if user cancel to create a new pet */
         const handleCancel = () => {
             router.go(-1)
         }
 
+        /**
+         * Handle change event of file selected to detect the file type
+         * is acceptable or not.
+         */
         const handleChange = e => {
             const selected = e.target.files[0]
 

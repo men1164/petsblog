@@ -40,6 +40,10 @@ export default {
         const { data: pets } = getCollection('petDetail', 'pets')
         const search = ref('')
 
+        /**
+         * Use to computed all pets and filter only user's own pets,
+         * also filter with search value if needed.
+         */
         const ownPets = computed(() => {
             let res
             if(pets.value && search.value) {

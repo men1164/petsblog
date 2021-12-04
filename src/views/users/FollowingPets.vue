@@ -29,6 +29,10 @@ export default {
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
         const search = ref('')
 
+        /**
+         * Use to computed all pets and filter only user following pets,
+         * also filter with search value if needed.
+         */
         const followingPets = computed(() => {
             let res
             if(pets.value && userDetail.value) {

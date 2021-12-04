@@ -24,6 +24,9 @@ export default {
     const password = ref('')
     const router = useRouter()
 
+    /**
+     * Handle logging in method.
+     */
     const handleLogin = async () => {
       await login(email.value, password.value)
       if(!error.value) {

@@ -38,6 +38,9 @@ export default {
         const newComment = ref('')
         const { data: comments } = getCollection('comments', 'comments', ['blogId', '==', props.blogId])
         
+        /**
+         * Handle submit and request to create new comment in the blog.
+         */
         const handleSubmit = async () => {
             const commentDoc = {
                 body: newComment.value,

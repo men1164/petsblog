@@ -25,6 +25,9 @@ export default {
         const { data: pets } = getCollection('petDetail', 'pets')
         const { data: blogs } = getCollection('veterinarianBlog', 'blogs')
 
+        /**
+         * Use to convert the scroll direction in order to use the mouse wheel to scroll left or right.
+         */
         onMounted((e) => {
             const blogCard = document.querySelector('.blogcard-sm');
             const petCard = document.querySelector('.petcard');

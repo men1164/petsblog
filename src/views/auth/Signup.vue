@@ -35,15 +35,18 @@ export default {
         const password = ref('')
         const displayName = ref('')
         const file = ref(null)
-        const fileError = ref(null)
+        const fileError = ref(null) /* error message about file */
         const router = useRouter()
         const { url, uploadImage } = useStorage()
         const { initDetail } = useUserDetail('userDetail')
-        const types = ['image/png', 'image/jpeg']
-        const previewURL = ref(null)
+        const types = ['image/png', 'image/jpeg']   /* acceptable file type */
+        const previewURL = ref(null)    /* using for preview image before upload */
 
         const { error, signup, isPending, updatePhotoURL } = useSignup()
 
+        /**
+         * Handle submit form to send a signup request
+         */
         const handleSignup = async () => {
 
             if(file.value) {
@@ -51,6 +54,7 @@ export default {
                 await uploadImage(file.value, res.user.uid, 'profileImg')
                 await updatePhotoURL(res.user, url.value)
     
+                /* Initial user's detail object when sign up */
                 const initDoc = {
                     userID: res.user.uid,
                     username: res.user.displayName,
@@ -69,6 +73,10 @@ export default {
             }
         }
 
+        /**
+         * Handle change event of file selected to detect the file type
+         * is acceptable or not.
+         */
         const handleChange = e => {
             const selected = e.target.files[0]
 

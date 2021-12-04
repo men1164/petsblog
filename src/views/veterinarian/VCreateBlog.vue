@@ -52,11 +52,15 @@ export default {
         const { url, filePath, uploadImage } = useStorage()
         const file = ref(null)
         const fileError = ref(null)
-        const previewURL = ref(null)
+        const previewURL = ref(null)    /* using for preview image before upload */
         const permissionDenied = ref(null)
         const router = useRouter()
-        const types = ['image/png', 'image/jpeg']
+        const types = ['image/png', 'image/jpeg']   /* acceptable file type */
 
+        /**
+         * Handle blog submission and request,
+         * redirect to VBlogview page if blog successfully created
+         */
         const submitBlog = async () => {
             permissionDenied.value = null
             const docBlog = {
@@ -92,6 +96,10 @@ export default {
 
         }
 
+        /**
+         * Handle change event of file selected to detect the file type
+         * is acceptable or not.
+         */
         const handleChange = e => {
             const selected = e.target.files[0]
 
@@ -107,6 +115,9 @@ export default {
             }
         }
 
+        /**
+         * If user cancel to create a blog, redirect back.
+         */
         const handleCancel = () => {
             router.go(-1)
         }

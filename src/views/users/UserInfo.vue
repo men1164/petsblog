@@ -48,10 +48,12 @@ export default {
 
         const { userDetail } = getUserDetail('userDetail', user.value.uid)
 
+        /* Handle toggle form to verify veterinarian */
         const handleToggle = () => {
             toggleForm.value = !toggleForm.value
         }
 
+        /* Handle request to verify veterinarian */
         const handleVerify = async () => {
             await userVerify(userDetail.value.docId)
             if(!error.value) {

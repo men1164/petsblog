@@ -31,6 +31,10 @@ export default {
         const { data: blogs } = getCollection('petBlog', 'blogs')
         const search = ref('')
 
+        /**
+         * Use to computed all blogs and filter only user's own blog,
+         * also filter with search value if needed.
+         */
         const isOwnBlogs = computed(() => {
             let res
             if(blogs.value && userDetail.value) {

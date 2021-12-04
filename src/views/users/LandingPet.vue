@@ -142,22 +142,26 @@ export default {
         const newPetsName = ref(null)
         const editError = ref(null)
         const router = useRouter()
-        const isOpen = ref(false)
+        const isOpen = ref(false)   /* Delete warning modal display state, default false */
 
+        /* Compute that user own this pet or not, in order to display create blog and delete pet button */
         const isOwnership = computed(() => {
             return pet.value && userDetail.value && pet.value.ownerDocID == userDetail.value.docId
         })
 
+        /* Compute that user following this pet or not in order to display following button state */
         const isFollowing = computed(() => {
             return userDetail.value && [...userDetail.value.followedPets].includes(props.id)
         })
 
+        /* To toggle the input field when user wants to edit pet's name */
         const toggleForm = () => {
             newPetsName.value = null
             editError.value = null
             isEdit.value = !isEdit.value
         }
 
+        /* Handle updating pet's name request */
         const submitEdit = async () => {
             let inputName
             editError.value = null
@@ -171,16 +175,19 @@ export default {
             }
         }
 
+        /* Handle following request */
         const handleFollow = async () => {
             await followPet(userDetail.value.docId, props.id, 'follow')
             await toggleFollow(props.id, 'follow')
         }
 
+        /* Handle unfollowing request */
         const handleUnfollow = async () => {
             await followPet(userDetail.value.docId, props.id, 'unfollow')
             await toggleFollow(props.id, 'unfollow')
         }
 
+        /* Handle delete the pet, also all the blogs that created from this pet */
         const handleDelete = async () => {
             if(blogs.value) {
                 let blog
@@ -196,6 +203,7 @@ export default {
             router.push({ name: 'YourPet' })
         }
 
+        /* Toggle the delete warning modal state to display or not */
         const closeModal = () => {
             isOpen.value = false
         }

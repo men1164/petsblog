@@ -126,7 +126,7 @@ export default {
         const { toggleLike, deleteDocument: deleteBlog } = useData('petBlog')
         const { deleteImage } = useStorage()
         const { likedBlogsAction } = useUserDetail('userDetail')
-        const isOpen = ref(false)
+        const isOpen = ref(false)   /* Delete warning modal display state, default false */
         const router = useRouter()
         
         // Computed if user give a like on this blog or not
@@ -159,7 +159,7 @@ export default {
             router.push({ name: "LandingPet", params: { id: pet.value.docId } })
         }
 
-        // Set the modal state to display or not
+        /* Toggle the delete warning modal state to display or not */
         const closeModal = () => {
             isOpen.value = false
         }

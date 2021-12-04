@@ -125,27 +125,32 @@ export default {
         const { toggleLike, deleteDocument: deleteBlog } = useData('veterinarianBlog')
         const { deleteImage } = useStorage()
         const { likedBlogsAction } = useUserDetail('userDetail')
-        const isOpen = ref(false)
+        const isOpen = ref(false)   /* Delete warning modal display state, default false */
         const router = useRouter()
         
+        // Computed if user give a like on this blog or not
         const isLiked = computed(() => {
             return userDetail.value && [...userDetail.value.likedBlogs].includes(props.blogId)
         })
 
+        // Computed if user own this blog, then the delete button will appear.
         const isOwner = computed(() => {
             return user.value && user.value.uid == blog.value.userID
         })
 
+        // Perform like request to the backed
         const handleLike = async () => {
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'like')
             await toggleLike(props.blogId, 'like')
         }
 
+        // Perform unlike request to the backend
         const handleUnlike = async () => {
             await likedBlogsAction(userDetail.value.docId, props.blogId, 'unlike')
             await toggleLike(props.blogId, 'unlike')
         }
 
+        // Perform delete request
         const handleDelete = async () => {
             await deleteImage(blog.value.filePath)
             await deleteBlog(blog.value.docId)
@@ -153,6 +158,7 @@ export default {
             router.push({ name: "Explore" })
         }
 
+        /* Toggle the delete warning modal state to display or not */
         const closeModal = () => {
             isOpen.value = false
         }

@@ -35,6 +35,9 @@ export default {
     const { error, logout, isPending } = useLogout()
     const router = useRouter()
 
+    /**
+     * Handle sending request to logging out
+     */
     const handleLogout = async () => {
       await logout()
       if(!error.value) {
