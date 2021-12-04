@@ -31,7 +31,6 @@
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
-                    <!-- <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Female"> -->
                 </div>
             </div>
             <div class="flex items-center w-full mb-5 text-white font-bold">
@@ -47,6 +46,8 @@
                     <button v-else class="py-2.5 text-primary-green text-lg font-medium bg-white w-32 h-12 rounded-2xl shadow-lg" type="submit" disabled>Creating...</button>
                 </div>
             </div>
+            <p class="text-white text-center mt-2">{{ fileError }}</p>
+            <p class="text-white text-center mt-2">{{ error }}</p>
         </form>
     </div>
 </template>
