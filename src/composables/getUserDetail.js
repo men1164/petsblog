@@ -2,6 +2,13 @@ import { projectFirestore } from '../firebase/config'
 import { collection, onSnapshot, query, where } from '@firebase/firestore'
 import { ref, watchEffect } from 'vue'
 
+/****
+ * This composable use for get the detail of the user,
+ * the special fields that Authentication service did not provide.
+ * Arguments
+ * - collectionName
+ * - uid: use to match the user's id from authentication.
+ * ****/
 const getUserDetail = (collectionName, uid) => {
         
     const userDetail = ref(null)

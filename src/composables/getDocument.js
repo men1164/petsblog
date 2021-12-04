@@ -5,6 +5,9 @@ import { projectFirestore } from '../firebase/config'
 /**** 
  * This composable use for get a specific document in the collection,
  * mostly get pet's or blog's detail.
+ * Arguments
+ * - collectionName
+ * - id: use for reference to the document's id in that collection
  * ****/
 const getDocument = (collectionName, id) => {
     const error = ref(null)

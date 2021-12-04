@@ -5,6 +5,12 @@ import { projectAuth } from '../firebase/config'
 const error = ref('')
 const isPending = ref(false)
 
+/**
+ * Use for authenticate with email and password.
+ * Arguements
+ * - email
+ * - password
+ */
 const login = async (email, password) => {
     error.value = null
     isPending.value = true

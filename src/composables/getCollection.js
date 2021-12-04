@@ -4,7 +4,7 @@ import { projectFirestore } from '../firebase/config'
 
 
 /**** 
- * This composables is using for get many documents in each collection, query only if needed  
+ * This composable is using for get many documents in each collection, query only if needed  
  * Recieve 3 arguments
  * - collectionName: for getting data from that collection.
  * - get: use to specify a type of data, to perform difference queries. (blogs, pets or comments)
@@ -14,7 +14,7 @@ const getCollection = (collectionName, get, qr) => {
     const error = ref(null)
     const data = ref(null)
     const collectionRef = collection(projectFirestore, collectionName)
-    let q   /* a data refences if query is needed */
+    let q   /* a collection references if query is needed */
 
     /****
      * Conditions 

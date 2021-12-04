@@ -3,8 +3,16 @@ import { projectAuth } from '../firebase/config'
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth"
 
 const error = ref(null)
-const isPending = ref(false)
+const isPending = ref(false) // request's status
 
+/**
+ * Use for signup with email and password
+ * Arguments
+ * - email
+ * - password
+ * - displayName: to input a display name after created user with email and password.
+ * Return a response value.
+ */
 const signup = async (email, password, displayName) => {
 
     error.value = null
@@ -27,6 +35,13 @@ const signup = async (email, password, displayName) => {
     }
 }
 
+/**
+ * Use for update profile photo url, becuase it needs to wait the photo uploaded into Cloud Storage first,
+ * then we'll get a url to display photo in front-end.
+ * Arguments
+ * - user: an object to reference to the user, get from returned response in signup function.
+ * - url: string, a photo url.
+ */
 const updatePhotoURL = async (user, url) => {
     try {
         await updateProfile(user, { photoURL: url })
